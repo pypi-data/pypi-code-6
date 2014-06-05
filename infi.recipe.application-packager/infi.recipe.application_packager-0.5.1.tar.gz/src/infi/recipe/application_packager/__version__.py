@@ -1,0 +1,10 @@
+__version__ = "0.5.1"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.5.1)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '8239e6d501cdfd7c0d7743710588810e5bd2033c'
+__git_head_subject__ = 'HOSTDEV-1586 passing -U to buildout so it will not read the user configuration from his home direcotry'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
