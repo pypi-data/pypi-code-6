@@ -1,0 +1,10 @@
+__version__ = "0.6.23"
+__git_commiter_name__ = "Arnon Yaari"
+__git_commiter_email__ = "arnony@infinidat.com"
+__git_branch__ = '(detached from v0.6.23)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'be687b9fa2318e831faeba0bcd1a11a6efb3a2ee'
+__git_head_subject__ = 'buildout.cfg: changed isolated python version to v2.7.6.6'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
