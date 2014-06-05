@@ -1,0 +1,10 @@
+__version__ = "0.2.15"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.15)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'b2fd16b20f8ed65b343152bc8e243d9f2e2741c4'
+__git_head_subject__ = 'Finished release v0.2.15.'
+__git_head_message__ = '* release/v0.2.15:\n  TRIVIAL removing unused import\n  logging level fix\n  rescan_scsi_hosts: join\n  ensure_subprocess_dead: fixing the way subprocesses are killed\n  ensure_subprocess_dead: fixing the way subprocesses are killed'
+__git_dirty_diff__ = ''
