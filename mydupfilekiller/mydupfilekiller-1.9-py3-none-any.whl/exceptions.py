@@ -1,0 +1,2 @@
+class SkipAllException(BaseException):
+    pass
