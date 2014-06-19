@@ -1,0 +1,10 @@
+__version__ = "0.2.19"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.19)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '163649957e2a603b5c142aaab5713256b4400f1f'
+__git_head_subject__ = 'Finished release v0.2.19.'
+__git_head_message__ = '* release/v0.2.19:\n  HIP-1113 cleaning up\n  HIP-1113 cleaning up\n  HIP-1113 cleaning up\n  HIP-1113 rescan_scsi_bus.utils.check_for_scsi_errors: runs the decorated func twice\n  HIP-1126 Infinidat predicates handle asi and instruct errors\n  HIP-1113 rescan_scsi_bus: proper handling of sub-processes\n  STORAGEMODEL-276 fixing the test\n  STORAGEMODEL-276 reading host and cluster id from page 0xc6 or 0xc5 instead of page 0x83'
+__git_dirty_diff__ = ''
