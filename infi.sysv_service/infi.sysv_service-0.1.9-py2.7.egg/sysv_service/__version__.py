@@ -1,0 +1,10 @@
+__version__ = "0.1.9"
+__git_commiter_name__ = "Arnon Yaari"
+__git_commiter_email__ = "arnony@infinidat.com"
+__git_branch__ = '(detached from v0.1.9)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'f68e3fc5b806d79be4a4585f0a7214dfffadf44d'
+__git_head_subject__ = 'update homepage'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
