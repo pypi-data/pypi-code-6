@@ -1,0 +1,10 @@
+__version__ = "0.5.2"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.5.2)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'dfda6c27a2f3277c463e3ccda8d626e470149172'
+__git_head_subject__ = 'Finished release v0.5.2.'
+__git_head_message__ = '* release/v0.5.2:\n  HOSTDEV-627 patch signtool.exe to pass a necessary flag - CRYPT_MACHINE_KEYSET to PFXImportCertStore\n  fix tests'
+__git_dirty_diff__ = ''
