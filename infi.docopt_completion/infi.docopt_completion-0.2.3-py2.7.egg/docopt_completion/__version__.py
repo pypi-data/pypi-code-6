@@ -1,0 +1,10 @@
+__version__ = "0.2.3"
+__git_commiter_name__ = "Arnon Yaari"
+__git_commiter_email__ = "arnony@infinidat.com"
+__git_branch__ = '(detached from v0.2.3)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'b93ae194b4299b704f9f56c762310bbbf8431c6a'
+__git_head_subject__ = 'fix issue #6 - suggest files'
+__git_head_message__ = 'The new behavior is as follows:\nin bash, whenever the next word can be an argument, files will be suggested along with the flags, regardless of the argument name (there are usually no subcommands to suggest when there are arguments so it\'s ok to suggest files)\nin zsh, when the next word can be an argument: if the argument name contains "file" or "path", then files will be suggested, otherwise, as before, the name of the argument will be displayed'
+__git_dirty_diff__ = ''
