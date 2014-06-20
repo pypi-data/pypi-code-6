@@ -1,0 +1,15 @@
+from setuptools import setup, find_packages
+setup(name="classowl-client",
+      version="0.1a1",
+      packages=find_packages(),
+      url="http://localhost",
+      maintainer="Matei Trusca",
+      maintainer_email="matei.trusca@devlabel.com",
+      description="a client for the classowl.com REST API",
+      classifiers=['Programming Language :: Python :: 2.7',
+                   'License :: OSI Approved :: MIT License',
+                   'Intended Audience :: Developers',
+                   'Topic :: Internet :: WWW/HTTP'],
+      license='LICENSE',
+      long_description=open('README.rst').read(),
+      install_requires=["slumber == 0.8"])
