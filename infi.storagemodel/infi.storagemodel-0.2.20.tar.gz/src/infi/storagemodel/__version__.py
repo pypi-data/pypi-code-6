@@ -1,0 +1,10 @@
+__version__ = "0.2.20"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.20)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '8b7fc1cd73c930a56a7dcc39c03e61a13735fb64'
+__git_head_subject__ = 'Finished release v0.2.20.'
+__git_head_message__ = '* release/v0.2.20:\n  TRIVIAL mentioning in the docs that fields from standard inquiry are stripped\n  STORAGEMODEL-277 changes in SCSI Inquiry, starting from InfiniBox 1.5.0.14\n  TRIVIAL InfiniBox vid_pid_with_spaces'
+__git_dirty_diff__ = ''
