@@ -1,0 +1,10 @@
+__version__ = "0.2.21"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.21)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '0e329ea9a0d41bf0be5a10b47060f0d5892718fb'
+__git_head_subject__ = 'TRIVIAL fixing DEFAULT_PORT'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
