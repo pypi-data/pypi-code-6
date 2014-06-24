@@ -1,0 +1,18 @@
+COLORS = [
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'cadetblue',
+    'blue',
+    'purple',
+    'cornflowerblue',
+    'red-light',
+    'orange-light',
+    'yellow-light',
+    'green-light',
+    'cadetblue-light',
+    'cornflowerblue-light',
+    'blue-light',
+    'purple-light',
+]
