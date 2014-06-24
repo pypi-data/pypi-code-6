@@ -1,0 +1,10 @@
+__version__ = "0.2.22"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.22)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '8050fecebff9e12a086b63cae1be3528fe957504'
+__git_head_subject__ = 'STORAGEMODEL-279 stripping VMwareInquiryInformationMixin.get_scsi_product_id and get_scsi_vendor_id'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
