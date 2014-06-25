@@ -1,0 +1,7 @@
+master_folder = 'UDEMY_TEST_FOLDER'
+contact_list = 'NON_USER_CONTACTS_LIST_TEST'
+profile_extension = 'TEST_USER_SIGNUP_SOURCE'
+supplementary_table = 'TEST_COURSE_HAS_USER'
+username = 'api@udemy'
+password = 'Murfyzf8TG8cuNY'
+pod = '5'
