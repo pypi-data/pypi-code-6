@@ -1,0 +1,10 @@
+__version__ = "0.5.4"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.5.4)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'd574c24a5a1846e73109bc29fcac1ef183b6de6d'
+__git_head_subject__ = 'Finished release v0.5.4.'
+__git_head_message__ = '* release/v0.5.4:\n  TRIVIAL fixing CXX\n  TRIVIAL fixing join\n  TRIVIAL more env vars for pystick'
+__git_dirty_diff__ = ''
