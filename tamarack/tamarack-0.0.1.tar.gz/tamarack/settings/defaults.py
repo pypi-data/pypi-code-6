@@ -1,0 +1,5 @@
+DEBUG = False
+JS_DEBUG = True
+
+LISTEN_ADDRESS = ''
+PORT = 3000
