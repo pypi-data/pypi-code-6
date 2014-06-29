@@ -1,0 +1,10 @@
+__version__ = "0.2.23"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.23)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'e3ea571159c874ae8432ef2241acc25ea89cfd1d'
+__git_head_subject__ = 'Finished release v0.2.23.'
+__git_head_message__ = '* release/v0.2.23:\n  HIPVM-435 fixed logging in VMwarePath.get_path\n  HIPVM-435 VMwarePath.get_path now raises RescanIsNeeded if the HCTL is not to be found'
+__git_dirty_diff__ = ''
