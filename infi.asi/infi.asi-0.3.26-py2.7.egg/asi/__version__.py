@@ -1,0 +1,10 @@
+__version__ = "0.3.26"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.3.26)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '9321a2b8e7842c47306a58bd0ec633014e4bfee9'
+__git_head_subject__ = 'Finished release v0.3.26.'
+__git_head_message__ = '* release/v0.3.26:\n  EVPD commands: allocation length needs to be 252 (n-3)\n  STORAGEMODEL-280 STANDARD_INQUIRY_MINIMAL_DATA_LENGTH'
+__git_dirty_diff__ = ''
