@@ -1,0 +1,37 @@
+def location(current_location):
+
+	hints = {
+	'Apartment': 'Try searching the cupboard.',
+	'Curling Street': 'Notice the policeman.',
+	'Foreman Ave': 'Check the waste containers.',
+	'Harrington River': 'no hint',
+	'March Street': 'Maybe there\'s something in the building.',
+	'Junction': 'You need to decide where to go.',
+	'Old Building': 'Try getting the lights on somehow.',
+	'Old Building (first floor)': 'Dave might have something delicious on him.',
+	'Old Building (second floor)': 'Get something good for Charlie, he will return the favor.',
+	'22nd Street': 'Sometimes monsters are here, sometimes not.',
+	'Wanda\'s House': 'Type OUT to go out.',
+	'Suburbs':'Look for the pirate flag and listen to dog bark.',
+	'Suburb 1': 'Nothing here...',
+	'Suburb 2': 'Nothing here...',
+	'Suburb 3': 'Nothing here...',
+	'Suburb 4': 'Check the pirate flag.',
+	'Suburb 5': 'Nothing here...',
+	'Suburb 6': 'Nothing here...',
+	'Suburb Junction': 'Go check the mansion.',
+	'Small houses': 'Nothing here...',
+	'House with pirate flag': 'Take the stairs, also there might be something in the kitchen.',
+	'Basement': 'You need to look through junk several times, there are 2 items.',
+	'Kitchen': 'Look in the cupboard.',
+	'Cherry trees': 'Go check out the mansion.',
+	'A very long street': 'Nothing here...',
+	'Motor Shop': 'There is a laptop on the counter. Look for item K5-22TS.',
+	'Warehouse': 'Check the shelves A and T.',
+	'Maintenance room': 'You need three items to use the workbench, they\'re all here in the building.',
+	'Restroom': 'You might wanna take the broom.',
+	'Marina': 'Yellow boat is Wanda\'s boat. Careful when going inside.',
+	'22nd Street': 'Always save before going in this location, lots of enemies around.',
+	}
+
+	return hints.get(current_location)
