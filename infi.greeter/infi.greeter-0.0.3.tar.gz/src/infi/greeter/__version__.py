@@ -1,0 +1,10 @@
+__version__ = "0.0.3"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "yalon@infinidat.com"
+__git_branch__ = '(detached from v0.0.3)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '4d85d535a42a8cce8c69060a6df091042e6e9ece'
+__git_head_subject__ = 'added line wrapping for log display'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
