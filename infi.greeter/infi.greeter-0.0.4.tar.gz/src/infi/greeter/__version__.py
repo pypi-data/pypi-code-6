@@ -1,0 +1,10 @@
+__version__ = "0.0.4"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "yalon@infinidat.com"
+__git_branch__ = '(detached from v0.0.4)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'c264c1ea2c9167247842dfea7501026a4cc6130d'
+__git_head_subject__ = 'added setup_status program to the greeter to show SETUP when the service is setting up'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
