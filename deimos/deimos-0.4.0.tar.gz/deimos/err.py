@@ -1,0 +1,2 @@
+class Err(RuntimeError):
+    pass
