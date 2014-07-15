@@ -1,0 +1,10 @@
+__version__ = "0.1.2"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "yalon@infinidat.com"
+__git_branch__ = '(detached from v0.1.2)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '116c4de6d800ba34946186056d39794bca2c8a78'
+__git_head_subject__ = 'fix configure for AR in win32 to support response file (@)'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
