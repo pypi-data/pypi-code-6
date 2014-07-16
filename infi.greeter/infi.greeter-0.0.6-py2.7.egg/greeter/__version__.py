@@ -1,0 +1,10 @@
+__version__ = "0.0.6"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "yalon@infinidat.com"
+__git_branch__ = '(detached from v0.0.6)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'a082a15c1effe284d13d11713e7dfa08cc7f4c3b'
+__git_head_subject__ = 'Finished release v0.0.6.'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
