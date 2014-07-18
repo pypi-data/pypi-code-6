@@ -1,0 +1,83 @@
+# -*- coding: utf-8 -*-
+__author__ = 'vahid'
+import argparse
+import os
+import sys
+import time
+from isass import helpers, SassObserver, SassCompiler, Manifest
+
+
+parser = argparse.ArgumentParser(description='isass compiles SASS-indented-syntax into CSS or SCSS.')
+parser.add_argument('sources', nargs='*', default=[], help='Source files or directories to process. default: standard input. example: `./*.sass` or `.`')
+parser.add_argument('-o', '--output', metavar='OUTPUT' ,dest='output', help='Output file. default: standard output')
+parser.add_argument('-c','--scss', dest='scss', action='store_true', help='Skip scss compilation, just return scss contents.')
+parser.add_argument('-l','--lib-dir', dest='lib_dirs', nargs='?', action='append', help='Library dir to search for @imports.')
+parser.add_argument('-e','--extension', dest='extension', nargs='?', default='*.sass',help='Search for this file extension.')
+parser.add_argument('-m','--manifest-file', dest='manifest_file', nargs='+', help='Isass manifest file')
+parser.add_argument('-w','--watch', dest='watch', action='store_true', help='Watch for modifications, and update output.')
+
+
+
+def read_source():
+    inp = ''
+    if args.sources:
+        source_files = helpers.get_source_files(args.sources, args.extension)
+        for f in source_files:
+            with open(f) as reader:
+                inp += reader.read()
+                inp += '\n'
+    else:
+        # reading from standard input
+        inp += sys.stdin.read()
+
+    return inp
+
+def build(sass):
+    compiler = SassCompiler(lib_dirs=args.lib_dirs)
+    compiler.read_string(sass)
+    if args.scss:
+        return compiler.get_scss()
+    else:
+        return compiler.get_css()
+
+def start_watchdog():
+
+    # Asserts
+    assert args.output, "Please provide an output file via -o option, Standard output was not supported in watch mode."
+    source_msg = "Please provide one or more directory as sources, files and standard input was not supported in watch mode."
+    assert len(args.sources) > 0, source_msg
+    for s in args.sources:
+        assert os.path.isdir(s), source_msg
+
+    observer = SassObserver()
+    observer.add_output(args.output, dirs=helpers.get_source_dirs(args.sources), lib_dirs=args.lib_dirs)
+    observer.start()
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+    observer.join()
+
+
+def main():
+    global args
+    args = parser.parse_args()
+
+
+    if args.watch:
+        start_watchdog()
+    else:
+        #TODO: standard output
+        if args.output:
+            with open(args.output,'w') as outfile:
+                outfile.write(build(read_source()))
+        elif args.manifest_file:
+            if isinstance(args.manifest_file, basestring):
+                args.manifest_file = [args.manifest_file]
+            for f in args.manifest_file:
+                m = Manifest(f)
+                m.write_outputs()
+        else:
+            print build(read_source())
+
