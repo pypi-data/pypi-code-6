@@ -1,0 +1,10 @@
+__version__ = "0.3"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "yalon@infinidat.com"
+__git_branch__ = '(detached from v0.3)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'c567efa043cdace9df2c897200c4a29d47a69e26'
+__git_head_subject__ = 'added processors and streamlined dependency mechanism to enable/disable use of optional packages gevent, infi.tracing and setproctitle'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
