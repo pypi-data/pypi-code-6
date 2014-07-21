@@ -1,0 +1,10 @@
+__version__ = "0.2.24"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.24)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '5aebc0bb3a05533024c47f1da3147162883c607e'
+__git_head_subject__ = 'Finished release v0.2.24.'
+__git_head_message__ = '* release/v0.2.24:\n  HIPVM-468\n  TRIVIAL fixing the docs\n  STORAGEMODEL-283 more changes to the sysfs tests\n  STORAGEMODEL-283 Another update in sysfs for the UT to work +review\n  STORAGEMODEL-283 updated sysfs unit tests to support the latest changes\n  STORAGEMODEL-283 get the list of sd devices via ioctl +review\n  STORAGEMODEL-281 skipping drives with physical drive number -1\n  TRIVIAL logging level\n  STORAGEMODEL-280 change in behaviour of get_scsi_standard_inquiry\n  STORAGEMODEL-280 always using the safest way\n  STORAGEMODEL-280 change in behaviour of get_scsi_standard_inquiry\n  STORAGEMODEL-280 change in behaviour of get_scsi_standard_inquiry'
+__git_dirty_diff__ = ''
