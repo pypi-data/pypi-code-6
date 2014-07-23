@@ -1,0 +1,5 @@
+__title__ = 'Django ajax crawler'
+__version__ = '0.1'
+__author__ = 'Alexander Polesov'
+__license__ = 'MIT License'
+__copyright__ = 'Copyright 2014 Alexander Polesov'
