@@ -1,0 +1,1 @@
+from svg_compression import Compress, compress_by_method
