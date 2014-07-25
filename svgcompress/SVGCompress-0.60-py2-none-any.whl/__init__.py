@@ -1,0 +1,2 @@
+from svg_compression import Compress, compress_by_method
+from vector_utils import optimize_svg
