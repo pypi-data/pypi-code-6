@@ -1,0 +1,10 @@
+__version__ = "0.4.17"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.4.17)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '39dd00febb34eb6982e0147454a11c2e7e61f3ca'
+__git_head_subject__ = 'TRIVIAL Python2.6-comptabile string formatting'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
