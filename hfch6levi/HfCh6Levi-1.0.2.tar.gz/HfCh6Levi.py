@@ -1,0 +1,67 @@
+'''code for HfCh6, bundling code with data'''
+''' the first thing is to modify the work directory'''
+import os
+os.chdir('/Users/AnQiuPing/Documents/Python/HfCh6Levi')
+
+'''this function is used to read data into a list from a specific file'''
+'''version2: add more function to enable this function to return processed data with the format of Dict rathen than unprocessed List'''
+def get_coach_data(file_name):
+    try:
+        with open(file_name) as file_object:
+            data = file_object.readline()
+            returnList = data.strip().split(',')
+            atheleteDict = dict()
+#            atheleteDict['name'] = returnList.pop(0)
+#            atheleteDict['bod'] = returnList.pop(0)
+#            atheleteDict['time'] = returnList
+#     print(atheleteDict['name'] + " 's fatest times are: " + str(sorted([sanitize(t) for t in returnList])[0:3]))
+            return {'Name':returnList.pop(0), 'Bod':returnList.pop(0), 'Time': sorted(set([sanitize(t) for t in returnList]))[0:3]}
+    except IOError as err:
+        print('File IO Error:', + str(err))
+        return (None)
+
+'''this function is used to adjust the data format for data from list'''
+def sanitize(target_list):
+    if '-' in target_list:
+        splitter = '-'
+    elif ':' in target_list:
+        splitter = ':'
+    else:
+        return target_list
+
+    (mins, secs) = target_list.split(splitter)
+    return (mins + '.' + secs)
+
+'''version2: refine the code for process the data using Dict into get_coach_data'''
+def pop():
+#    sarah = get_coach_data('sarah2.txt')
+
+    '''now use dictionary to refine the below code using list'''
+    sarahDict = dict()
+    jamesDict = dict()
+    julieDict = dict()
+    mikeyDict = dict()
+
+    sarahDict = get_coach_data('sarah2.txt')
+    jamesDict = get_coach_data('james2.txt')
+    julieDict = get_coach_data('julie2.txt')
+    mikeyDict = get_coach_data('mikey2.txt')
+
+    '''version2: now using the refined Dict keys to display the desired results'''
+    print(sarahDict['Name'] + " 's fatest times are: " + str(sarahDict['Time']))
+    print(jamesDict['Name'] + " 's fatest times are: " + str(jamesDict['Time']))
+    print(julieDict['Name'] + " 's fatest times are: " + str(julieDict['Time']))
+    print(mikeyDict['Name'] + " 's fatest times are: " + str(mikeyDict['Time']))
+    
+#    sarahDict = {}
+#    sarahDict['name'] = sarah.pop(0)
+#    sarahDict['dob'] = sarah.pop(0)
+#    sarahDict['time'] = sarah
+#    print(sarahDict['name']  + " 's fatest times are: " + str(sorted(set([sanitize(t) for t in sarahDict['time']]))[0:3]))
+#    (sarah_name, sarah_dob) = sarah.pop(0), sarah.pop(0)
+#    print(sarah_name + " 's fatest times are: " + str(sorted(set([sanitize(t) for t in sarah]))[0:3]))
+
+
+pop()
+    
+    
