@@ -1,0 +1,28 @@
+from setuptools import setup
+
+setup(name='dbms',
+	version='1.1.0',
+	description='DataBases Made Simpler - Uniform interface for multiple adapters',
+	long_description=open('README.txt').read(),
+	url='https://sourceforge.net/projects/pydbms/',
+	keywords='database rdbms Oracle PostgreSQL MySQL SQLServer',
+	classifiers=['Development Status :: 5 - Production/Stable',
+    'Environment :: Console', 
+    'License :: OSI Approved :: BSD License',
+    'Programming Language :: Python :: 2.6',
+    'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: SQL',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Information Technology',
+    'Intended Audience :: Science/Research',
+    'Topic :: Database',
+    'Topic :: Database :: Front-Ends',
+    'Natural Language :: English',
+    'Operating System :: OS Independent',
+	],
+	author='Scott Bailey',
+	author_email='scottrbailey@gmail.com',
+	license='LICENSE.txt',
+	packages=['dbms'])
+	
