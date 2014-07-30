@@ -1,0 +1,10 @@
+__version__ = "0.1.7"
+__git_commiter_name__ = "Arnon Yaari"
+__git_commiter_email__ = "arnony@infinidat.com"
+__git_branch__ = '(detached from v0.1.7)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'dbc7197df04601ea29b5b6eb4cc25ea9a0d94605'
+__git_head_subject__ = 'HIP-1180 using os.open with O_NONBLOCK to open the device to send the IOCTLS'
+__git_head_message__ = 'Previously it failed to open some devices such as floppy devices with no media.'
+__git_dirty_diff__ = ''
