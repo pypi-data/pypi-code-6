@@ -1,0 +1,10 @@
+__version__ = "0.2.1"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "yalon@infinidat.com"
+__git_branch__ = '(detached from v0.2.1)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'd9209016e9408f06e77c82bde4b5b5ac8dfec17c'
+__git_head_subject__ = 'fix for ancient compilers (gcc 4.4.7 for example) that do not support C99'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
