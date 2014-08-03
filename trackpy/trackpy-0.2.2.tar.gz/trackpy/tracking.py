@@ -1,0 +1,1 @@
+from .linking import *  # legacy
