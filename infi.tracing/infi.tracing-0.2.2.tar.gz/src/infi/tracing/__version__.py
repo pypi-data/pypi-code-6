@@ -1,0 +1,10 @@
+__version__ = "0.2.2"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "yalon@infinidat.com"
+__git_branch__ = '(detached from v0.2.2)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '2cca06e6319fa49202388bfd70c4ffd97ee1686f'
+__git_head_subject__ = '- fixed locking and added verfication with test_file_trace - removing dependency to gcc, adding more tests'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
