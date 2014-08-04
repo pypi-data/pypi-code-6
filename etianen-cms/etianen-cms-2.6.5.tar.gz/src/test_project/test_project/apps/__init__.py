@@ -1,0 +1,1 @@
+"""Custom applications installed by test_project project."""
