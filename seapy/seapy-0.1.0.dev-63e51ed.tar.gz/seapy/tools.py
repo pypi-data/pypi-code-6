@@ -1,0 +1,133 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import numpy.ma as ma
+import networkx as nx
+import itertools
+
+def plot(x, y, quantity, visible, yscale='linear'):
+    """
+    Plot `y` as function of `x` where `y` has quantity `quantity` and `x` is frequency :math:`f`.
+    
+    :param x: Array of values for the `x`-axis.
+    :param y: Array of values for the `y`-axis.
+    :param quantity: Quantity
+    :param visible: Array of booleans.
+    
+    :returns: Figure.
+    :type: :class:`matplotlib.figure.Figure`
+    
+    
+    """
+    mask = ~ visible.astype(bool)
+    x =  ma.masked_array(x, mask=mask).compressed()
+    y = (ma.masked_array(i, mask=mask).compressed() for i in y)
+    
+    try:
+        label = ATTRIBUTES[quantity]
+    except KeyError:
+        label = "Unknown quantity"
+        
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for i in y:
+        ax.scatter(x, i)
+    ax.set_xscale('log')
+    ax.set_yscale(yscale)
+    ax.set_xlabel('$f$ in Hz')
+    ax.set_ylabel(label)
+    ax.grid()
+    return fig
+
+    
+ATTRIBUTES = {'pressure_level'              :   '$L_p$ in dB',
+              'velocity_level'              :   '$L_v$ in dB',
+              'power_level'                 :   '$L_P$ in dB',
+              'mass'                        :   '$m$ in kg',
+              'impedance'                   :   '$Z$ in ...',
+              'resistance'                  :   '$R$ in ...',
+              'resistance_point_average'     :  '$R$ in ...',
+              'mobility'                    :   '$Y$ in ...',
+              'modal_density'               :   '$n$ in ...',
+              'average_frequency_spacing'   :   '$\Delta f$ in Hz',
+              'soundspeed_group'            :   '$c_{g}$ in m/s',
+              'soundspeed_phase'            :   '$c_{\phi}$ in m/s',
+              'clf'                         :   '$\eta$ in ...',
+              'input_power'                 :   '$P$ in W',
+              'loss_factor'                 :   '$\eta$ in $\mathrm{rad}^{-1}$',
+              'wavenumber'                  :   '$k$ in rad/m', 
+              'power'                       :   '$P$ in W',
+              }
+
+
+
+
+def graph(system, objects=None):
+    """Draw a graph of types specified in `objects`.
+    
+    .. note:: All objects are treated as nodes.
+    
+    """
+    
+    G = nx.DiGraph()
+    
+    for sort in objects:
+        nodes = (obj.name for obj in getattr(system, sort+'s'))
+        G.add_nodes_from(nodes)
+        
+    if 'component' in objects and 'subsystem' in objects:
+        edges = ((obj.name, obj.component.name) for obj in system.subsystems)
+        G.add_edges_from(edges)
+    
+    if 'component' in objects and 'material' in objects:
+        edges = ((obj.name, obj.component.name) for obj in system.materials)
+        G.add_edges_from(edges)
+    
+    if 'component' in objects and 'junction' in objects:
+        edges = ((obj.name, obj.component.name) for obj in system.junctions)
+        G.add_edges_from(edges)
+    
+    if 'subsystem' in objects and 'excitation' in objects:
+        edges = ((obj.name, obj.subsystem.name) for obj in system.excitations)
+        G.add_edges_from(edges)
+    
+    if 'junction' in objects and 'coupling' in objects:
+        edges = ((obj.name, obj.junction.name) for obj in system.couplings)
+        G.add_edges_from(edges)
+    
+    if 'subsystem' in objects and 'coupling' in objects:
+        edges = ((obj.name, obj.subsystem_from.name) for obj in system.couplings)
+        G.add_edges_from(edges)
+        edges = ((obj.name, obj.subsystem_to.name) for obj in system.couplings)
+        G.add_edges_from(edges)
+    
+    return G
+        
+    #edges = ((obj.name, getattr(obj, b).name) for obj in getattr(system, b+'s'))
+            #G.add_edges_from(edges)
+        #except AttributeError:
+            #pass
+        
+        #try:
+            #edges = ((obj.name, getattr(obj, b).name) for obj in getattr(system, b+'s'))
+            #G.add_edges_from(edges)
+        #except AttributeError:
+            #pass
+        
+
+def graph_couplings(system):
+    """Graph with subsystems as nodes and couplings as edges.
+    """
+    
+    G = nx.DiGraph()
+    
+    nodes = (obj.name for obj in system.subsystems)
+    edges = ((obj.subsystem_from.name, obj.subsystem_to.name, {'name': obj.name}) for obj in system.couplings)
+
+    G.add_nodes_from(nodes)
+    G.add_edges_from(edges)
+    
+    return G
+    
+    
+    
+
