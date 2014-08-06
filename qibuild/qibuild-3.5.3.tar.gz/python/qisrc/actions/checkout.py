@@ -1,0 +1,27 @@
+""" Checkout a new manifest branch and every repository
+in the worktree
+
+"""
+
+from qisys import ui
+import qisrc.parsers
+
+import sys
+
+def configure_parser(parser):
+    qisrc.parsers.worktree_parser(parser)
+    group = parser.add_argument_group("checkout options")
+    group.add_argument("branch")
+    group.add_argument("-f", "--force", action="store_true", dest="force",
+                        help="Discard local changes. Use with caution")
+    parser.set_defaults(force=False)
+
+def do(args):
+    branch = args.branch
+    git_worktree = qisrc.parsers.get_git_worktree(args)
+    manifest = git_worktree.manifest
+    groups = manifest.groups
+    branch = args.branch
+    git_worktree.configure_manifest(manifest.url, groups=groups, branch=branch)
+    git_worktree.checkout(branch, force=args.force)
+
