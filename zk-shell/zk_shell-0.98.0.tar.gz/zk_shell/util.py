@@ -1,0 +1,99 @@
+""" helpers """
+
+from collections import namedtuple
+import re
+import sys
+
+from distutils.util import strtobool
+
+PYTHON3 = sys.version_info > (3, )
+
+
+def pretty_bytes(num):
+    """ pretty print the given number of bytes """
+    for unit in ['', 'KB', 'MB', 'GB']:
+        if num < 1024.0:
+            if unit == '':
+                return "%d" % (num)
+            else:
+                return "%3.1f%s" % (num, unit)
+        num /= 1024.0
+    return "%3.1f%s" % (num, 'TB')
+
+
+def to_bool(boolstr):
+    """ str to bool """
+    return boolstr.lower() == "true"
+
+
+def to_bytes(value):
+    """ str to bytes (py3k) """
+    vtype = type(value)
+
+    if vtype == bytes or vtype == type(None):
+        return value
+
+    try:
+        return vtype.encode(value)
+    except UnicodeEncodeError:
+        pass
+    return value
+
+
+def to_int(sint, default):
+    """ get an int from an str """
+    try:
+        return int(sint)
+    except ValueError:
+        return default
+
+
+def to_float(sfloat, default):
+    """ get a float from an str """
+    try:
+        return float(sfloat)
+    except ValueError:
+        return default
+
+
+def decoded(s):
+    if PYTHON3:
+        return str.encode(s).decode('unicode_escape')
+    else:
+        return s.decode('string_escape')
+
+def prompt_yes_no(question):
+    print('%s [y/n]: ' % question)
+    while True:
+        try:
+            return strtobool(raw_input().lower())
+        except ValueError:
+            print('Please respond with \'y\' or \'n\'.\n')
+
+
+class Netloc(namedtuple("Netloc", "host scheme credential")):
+    """
+    network location info: host, scheme and credential
+    """
+    @classmethod
+    def from_string(cls, netloc_string):
+        host = scheme = credential = ""
+        if not "@" in netloc_string:
+            host = netloc_string
+        else:
+            scheme_credential, host =  netloc_string.rsplit("@", 1)
+
+            if ":" not in scheme_credential:
+                raise ValueError("Malformed scheme/credential (must be scheme:credential)")
+
+            scheme, credential = scheme_credential.split(":", 1)
+
+        return cls(host, scheme, credential)
+
+
+_hosts = re.compile(r"\A\w+(?:\.\w+)*(?::\d+)?(?:,\w+(?:\.\w+)*(?::\d+)?)*\Z")
+def invalid_hosts(hosts):
+    """
+    vaguely matches a list of host1[:port1][,host2[:port2]],...
+    """
+    return _hosts.match(hosts) is None
