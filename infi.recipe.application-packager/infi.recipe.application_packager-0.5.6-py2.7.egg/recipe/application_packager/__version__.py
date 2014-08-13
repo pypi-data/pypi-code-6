@@ -1,0 +1,10 @@
+__version__ = "0.5.6"
+__git_commiter_name__ = "Arnon Yaari"
+__git_commiter_email__ = "arnony@infinidat.com"
+__git_branch__ = '(detached from v0.5.6)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '8b1965407461a6d9fc5e49d225d2d8a400067b57'
+__git_head_subject__ = 'HOSTDEV-1699 python location on ftp'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
