@@ -1,0 +1,10 @@
+__version__ = "0.2.4"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.4)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '7a9bccba390eb3c025c1107a4d58fac687115189'
+__git_head_subject__ = 'Finished release v0.2.4.'
+__git_head_message__ = '* release/v0.2.4:\n  Remove deprecated function and add remove prefix also for centos\n  HIP-1172 multipath prefix for redhat 7 changes'
+__git_dirty_diff__ = ''
