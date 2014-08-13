@@ -1,0 +1,10 @@
+__version__ = "0.2.1"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.1)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'ee2fce09723ad5e9d7687dbcc8c7839102a18d6d'
+__git_head_subject__ = 'Finished release v0.2.1.'
+__git_head_message__ = '* release/v0.2.1:\n  TRIVIAL another fix\n  adding --assign-to-me in create command\n  TRIVIAL whitespaces\n  TRIVIAL help\n  improvements'
+__git_dirty_diff__ = ''
