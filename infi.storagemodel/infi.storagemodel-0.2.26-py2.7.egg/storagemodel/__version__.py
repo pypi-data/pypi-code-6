@@ -1,0 +1,10 @@
+__version__ = "0.2.26"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.26)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '4897ac01892f9c9f98075aefbe6ecf6ee2175b22'
+__git_head_subject__ = 'Finished release v0.2.26.'
+__git_head_message__ = '* release/v0.2.26:\n  Add missing index template\n  add main index file to docs\n  default css copied from pdoc\n  Build the documentation using pdoc\n  Build the documentation using pdoc\n  Build the documentation using pdoc\n  Remove sudo from command\n  - improve documentation - migrate documentation from sphinx to pdoc\n  - improve documentation - migrate documentation from sphinx to pdoc\n  Tweak the html for improved clarity\n  original templates from pdoc 0.2.3\n  small bug fix (calling get_type instead of get_typename)'
+__git_dirty_diff__ = ''
