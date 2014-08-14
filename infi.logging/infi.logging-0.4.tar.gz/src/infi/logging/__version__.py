@@ -1,0 +1,10 @@
+__version__ = "0.4"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "tal.yalon@gmail.com"
+__git_branch__ = '(detached from v0.4)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'e4180c00768f12086afe48e54d74a577370b157a'
+__git_head_subject__ = 'major refactoring and plugin system done'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
