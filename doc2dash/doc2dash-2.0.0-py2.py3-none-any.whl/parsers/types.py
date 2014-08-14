@@ -1,0 +1,17 @@
+from __future__ import absolute_import, division, print_function
+
+ATTRIBUTE = "Attribute"
+CLASS = "Class"
+CONSTANT = "Constant"
+ENV = "Environment"
+EXCEPTION = "Exception"
+FUNCTION = "Function"
+INTERFACE = "Interface"
+MACRO = "Macro"
+METHOD = "Method"
+OPCODE = "Operator"
+OPTION = "Option"
+PACKAGE = "Module"
+TYPE = "Type"
+VALUE = "Value"
+VARIABLE = "Variable"
