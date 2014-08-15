@@ -1,0 +1,27 @@
+import os
+try:
+  from setuptools import setup
+except ImportError:
+  from ez_setup import use_setuptools
+  use_setuptools()
+  from setuptools import setup
+
+long_description = "Dio is a python package that provides easy access to digitalocean.com v2.0 API to manage and backup Droplets. Written from the ground up to be compatible with Lorenzo Setale's work on https://github.com/koalalorenzo/python-digitalocean."
+
+if os.path.isfile("README.md"):
+  with open("README.md") as file:
+    long_description = file.read()
+
+setup(
+  name              = "dio",
+  packages          = ["dio"],
+  version           = "0.2",
+  description       = "digitalocean.com v2.0 API to manage and backup Droplets",
+  author            = "Rob Johnson",
+  author_email      = "info@corndogcomputers.com",
+  url               = "https://github.com/corndogcomputers/python-dio",
+  install_requires  = ["requests"],
+  download_url      = "https://github.com/corndogcomputers/python-dio/tarball/0.2",
+  keywords          = ["digitalocean", "backup", "vps", "rsync", "api"],
+  long_description  = long_description,
+)
