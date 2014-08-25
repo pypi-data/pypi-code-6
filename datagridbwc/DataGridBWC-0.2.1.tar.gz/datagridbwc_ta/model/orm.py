@@ -1,0 +1,93 @@
+from blazeutils.strings import randchars
+import sqlalchemy as sa
+
+from sqlalchemybwc import db
+from sqlalchemybwc.lib.declarative import declarative_base, DefaultMixin
+from sqlalchemybwc.lib.decorators import ignore_unique, transaction
+import sqlalchemy.orm as saorm
+
+Base = declarative_base()
+
+class Radio(Base, DefaultMixin):
+    __tablename__ = 'sabwp_radios'
+
+    make = sa.Column(sa.Unicode(255), nullable=False)
+    model = sa.Column(sa.Unicode(255), nullable=False)
+    year = sa.Column(sa.Integer, nullable=False)
+
+class Car(Base, DefaultMixin):
+    __tablename__ = 'sabwp_cars'
+
+    make = sa.Column(sa.Unicode(255), nullable=False)
+    model = sa.Column(sa.Unicode(255), nullable=False)
+    year = sa.Column(sa.Integer, nullable=False)
+
+    radio_id = sa.Column(sa.Integer, sa.ForeignKey(Radio.id), nullable=False)
+    radio = sa.orm.relation(Radio, lazy=False)
+
+    def __repr__(self):
+        return '<Car %s, %s, %s>' % (self.make, self.model, self.year)
+
+class Person(Base, DefaultMixin):
+    __tablename__ = 'persons'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    firstname = sa.Column(sa.String(50))
+    lastname = sa.Column('last_name', sa.String(50))
+    inactive = sa.Column(sa.SmallInteger)
+    state = sa.Column(sa.String(50))
+    status_id = sa.Column(sa.Integer, sa.ForeignKey('statuses.id'))
+    address = sa.Column(sa.Integer)
+    createdts = sa.Column(sa.DateTime)
+    sortorder = sa.Column(sa.Integer)
+    floatcol = sa.Column(sa.Float)
+    numericcol = sa.Column(sa.Numeric)
+    boolcol = sa.Column(sa.Boolean)
+    due_date = sa.Column(sa.Date)
+    legacycol1 = sa.Column('LegacyColumn1', sa.String(50), key='legacycolumn')
+    legacycol2 = sa.Column('LegacyColumn2', sa.String(50))
+
+    status = saorm.relationship('Status')
+
+    def __repr__(self):
+        return '<Person: "%s, created: %s">' % (self.id, self.createdts)
+
+    @classmethod
+    def testing_create(cls, firstname=None):
+        firstname = firstname or randchars()
+        return cls.add(firstname=firstname)
+
+    @classmethod
+    def delete_cascaded(cls):
+        Email.delete_all()
+        cls.delete_all()
+
+class Email(Base, DefaultMixin):
+    __tablename__ = 'emails'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    person_id = sa.Column(sa.Integer, sa.ForeignKey(Person.id), nullable=False)
+    email = sa.Column(sa.String(50), nullable=False)
+
+    person = saorm.relationship(Person, backref='emails')
+
+class Status(Base, DefaultMixin):
+    __tablename__ = 'statuses'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    label = sa.Column(sa.String(50), nullable=False, unique=True)
+    flag_closed = sa.Column(sa.Integer, default=0)
+
+    @classmethod
+    def pairs(cls):
+        return db.sess.query(cls.id, cls.label).order_by(cls.label)
+
+    @classmethod
+    def delete_cascaded(cls):
+        Person.delete_cascaded()
+        cls.delete_all()
+
+    @classmethod
+    def testing_create(cls, label=None):
+        label = label or randchars()
+        return cls.add(label=label)
