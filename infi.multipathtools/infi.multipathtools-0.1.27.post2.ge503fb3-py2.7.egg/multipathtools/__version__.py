@@ -1,0 +1,10 @@
+__version__ = "0.1.27.post2.ge503fb3"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = 'develop'
+__git_remote_tracking_branch__ = 'origin/develop'
+__git_remote_url__ = 'git@infinigit.infinidat.com:host/multipathtools.git'
+__git_head_hash__ = 'e503fb3070b70d7f0558ad47b60c42dd642eb95f'
+__git_head_subject__ = 'HIP-1237 using gevent.socket if exists'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
