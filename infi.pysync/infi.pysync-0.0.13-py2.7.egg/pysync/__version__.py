@@ -1,0 +1,10 @@
+__version__ = "0.0.13"
+__git_commiter_name__ = "Shai Keren"
+__git_commiter_email__ = "shaik@infinidat.com"
+__git_branch__ = '(detached from v0.0.13)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'bd5580c3310d12cef3e3bfc4f92f208f97c1e48b'
+__git_head_subject__ = 'TRIVIAL now syncing file permissions'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
