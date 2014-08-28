@@ -1,0 +1,1 @@
+#  app/manage.py dumpdata --indent 2 signalbox ask twiliobox auth -e signalbox.Membership -e signalbox.Observation -e signalbox.ObservationData -e signalbox.ReminderInstance -e signalbox.Reply -e signalbox.Answer -e auth.Permission > app/signalbox/fixtures/test.json
