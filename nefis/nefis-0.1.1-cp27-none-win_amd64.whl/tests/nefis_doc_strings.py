@@ -1,0 +1,56 @@
+import nefis
+
+def print_docstring(method):
+       meth = getattr( nefis, method )
+       if hasattr( meth , '__doc__' ):
+           print('')
+           print(method)
+           print(getattr( meth , '__doc__' ))
+
+def print_doc():
+    print_docstring( 'clsnef' )
+    print_docstring( 'credat' )
+    print_docstring( 'crenef' )
+    print_docstring( 'defcel' )
+    print_docstring( 'defelm' )
+    print_docstring( 'defgrp' )
+    print_docstring( 'flsdat' )
+    print_docstring( 'flsdef' )
+    print_docstring( 'getels' )
+    print_docstring( 'getelt' )
+    print_docstring( 'gethdf' )
+    print_docstring( 'gethdt' )
+    print_docstring( 'getiat' )
+    print_docstring( 'getnfv' )
+    print_docstring( 'getrat' )
+    print_docstring( 'getsat' )
+    print_docstring( 'inqcel' )
+    print_docstring( 'inqdat' )
+    print_docstring( 'inqelm' )
+    print_docstring( 'inqfcl' )
+    print_docstring( 'inqfel' )
+    print_docstring( 'inqfgr' )
+    print_docstring( 'inqfia' )
+    print_docstring( 'inqfra' )
+    print_docstring( 'inqfsa' )
+    print_docstring( 'inqfst' )
+    print_docstring( 'inqgrp' )
+    print_docstring( 'inqmxi' )
+    print_docstring( 'inqncl' )
+    print_docstring( 'inqnel' )
+    print_docstring( 'inqngr' )
+    print_docstring( 'inqnia' )
+    print_docstring( 'inqnra' )
+    print_docstring( 'inqnsa' )
+    print_docstring( 'inqnxt' )
+    print_docstring( 'neferr' )
+    print_docstring( 'putels' )
+    print_docstring( 'putelt' )
+    print_docstring( 'putiat' )
+    print_docstring( 'putrat' )
+    print_docstring( 'putsat' )
+
+
+if __name__ == "__main__":
+    print_doc()
+
