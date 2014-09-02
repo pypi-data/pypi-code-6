@@ -1,0 +1,340 @@
+# PyMsgBox - A simple, cross-platform, pure Python module for JavaScript-like message boxes.
+# Al Sweigart al@inventwithpython.com
+
+# Modified BSD License
+# Derived from Stephen Raymond Ferg's EasyGui http://easygui.sourceforge.net/
+
+"""
+The four functions in PyMsgBox:
+
+ - alert(text='', title='', button='OK')
+
+    Displays a simple message box with text and a single OK button. Returns the text of the button clicked on.
+
+ - confirm(text='', title='', buttons=['OK', 'Cancel'])
+
+    Displays a message box with OK and Cancel buttons. Number and text of buttons can be customized. Returns the text of the button clicked on.
+
+ - prompt(text='', title='' , defaultValue='')
+
+    Displays a message box with text input, and OK & Cancel buttons. Returns the text entered, or None if Cancel was clicked.
+
+ - password(text='', title='', defaultValue='', mask='*')
+
+    Displays a message box with text input, and OK & Cancel buttons. Typed characters appear as *. Returns the text entered, or None if Cancel was clicked.
+"""
+
+__version__ = '1.0.0'
+
+import sys
+
+RUNNING_PYTHON_2 = sys.version_info[0] == 2
+
+
+if RUNNING_PYTHON_2:
+    from Tkinter import *
+else:
+    from tkinter import *
+
+rootWindowPosition = "+300+200"
+
+
+if TkVersion < 8.0 :
+    print('You are running Tk version: ' + str(TkVersion) + 'You must be using Tk version 8.0 or greater to use PyMsgBox.')
+    sys.exit()
+
+
+PROPORTIONAL_FONT_FAMILY = ("MS", "Sans", "Serif")
+MONOSPACE_FONT_FAMILY    = ("Courier")
+
+PROPORTIONAL_FONT_SIZE  = 10
+MONOSPACE_FONT_SIZE     =  9  #a little smaller, because it it more legible at a smaller size
+TEXT_ENTRY_FONT_SIZE    = 12  # a little larger makes it easier to see
+
+#STANDARD_SELECTION_EVENTS = ["Return", "Button-1"]
+STANDARD_SELECTION_EVENTS = ["Return", "Button-1", "space"]
+
+
+# Initialize some global variables that will be reset later
+__choiceboxMultipleSelect = None
+__widgetTexts = None
+__replyButtonText = None
+__choiceboxResults = None
+__firstWidget = None
+__enterboxText = None
+__enterboxDefaultText=""
+__multenterboxText = ""
+choiceboxChoices = None
+choiceboxWidget = None
+entryWidget = None
+boxRoot = None
+
+
+
+
+
+
+def alert(text='', title='', button='OK', root=None):
+    """Displays a simple message box with text and a single OK button. Returns the text of the button clicked on."""
+    return _buttonbox(msg=text, title=title, choices=[str(button)], root=root)
+
+
+def confirm(text='', title='', buttons=['OK', 'Cancel'], root=None):
+    """Displays a message box with OK and Cancel buttons. Number and text of buttons can be customized. Returns the text of the button clicked on."""
+    return _buttonbox(msg=text, title=title, choices=[str(b) for b in buttons], root=root)
+
+
+def prompt(text='', title='' , defaultValue='', root=None):
+    """Displays a message box with text input, and OK & Cancel buttons. Returns the text entered, or None if Cancel was clicked."""
+    return __fillablebox(text, title, default=defaultValue, mask=None,root=root)
+
+
+def password(text='', title='', defaultValue='', mask='*', root=None):
+    """Displays a message box with text input, and OK & Cancel buttons. Typed characters appear as *. Returns the text entered, or None if Cancel was clicked."""
+    return __fillablebox(text, title, defaultValue, mask=mask, root=root)
+
+
+
+
+
+def _denyWindowManagerClose():
+    """ don't allow WindowManager close
+    """
+    x = Tk()
+    x.withdraw()
+    x.bell()
+    x.destroy()
+
+def _buttonbox(msg, title, choices, root=None):
+    """
+    Display a msg, a title, and a set of buttons.
+    The buttons are defined by the members of the choices list.
+    Return the text of the button that the user selected.
+
+    @arg msg: the msg to be displayed.
+    @arg title: the window title
+    @arg choices: a list or tuple of the choices to be displayed
+    """
+    global boxRoot, __replyButtonText, __widgetTexts, buttonsFrame
+
+
+    # Initialize __replyButtonText to the first choice.
+    # This is what will be used if the window is closed by the close button.
+    __replyButtonText = choices[0]
+
+    if root:
+        root.withdraw()
+        boxRoot = Toplevel(master=root)
+        boxRoot.withdraw()
+    else:
+        boxRoot = Tk()
+        boxRoot.withdraw()
+
+    boxRoot.protocol('WM_DELETE_WINDOW', _denyWindowManagerClose )
+    boxRoot.title(title)
+    boxRoot.iconname('Dialog')
+    boxRoot.geometry(rootWindowPosition)
+    boxRoot.minsize(400, 100)
+
+    # ------------- define the messageFrame ---------------------------------
+    messageFrame = Frame(master=boxRoot)
+    messageFrame.pack(side=TOP, fill=BOTH)
+
+    # ------------- define the buttonsFrame ---------------------------------
+    buttonsFrame = Frame(master=boxRoot)
+    buttonsFrame.pack(side=TOP, fill=BOTH)
+
+    # -------------------- place the widgets in the frames -----------------------
+    messageWidget = Message(messageFrame, text=msg, width=400)
+    messageWidget.configure(font=(PROPORTIONAL_FONT_FAMILY,PROPORTIONAL_FONT_SIZE))
+    messageWidget.pack(side=TOP, expand=YES, fill=X, padx='3m', pady='3m')
+
+    __put_buttons_in_buttonframe(choices)
+
+    # -------------- the action begins -----------
+    # put the focus on the first button
+    __firstWidget.focus_force()
+
+    boxRoot.deiconify()
+    boxRoot.mainloop()
+    boxRoot.destroy()
+    if root: root.deiconify()
+    return __replyButtonText
+
+
+def __put_buttons_in_buttonframe(choices):
+    """Put the buttons in the buttons frame"""
+    global __widgetTexts, __firstWidget, buttonsFrame
+
+    __firstWidget = None
+    __widgetTexts = {}
+
+    i = 0
+
+    for buttonText in choices:
+        tempButton = Button(buttonsFrame, takefocus=1, text=buttonText)
+        _bindArrows(tempButton)
+        tempButton.pack(expand=YES, side=LEFT, padx='1m', pady='1m', ipadx='2m', ipady='1m')
+
+        # remember the text associated with this widget
+        __widgetTexts[tempButton] = buttonText
+
+        # remember the first widget, so we can put the focus there
+        if i == 0:
+            __firstWidget = tempButton
+            i = 1
+
+        # for the commandButton, bind activation events to the activation event handler
+        commandButton  = tempButton
+        handler = __buttonEvent
+        for selectionEvent in STANDARD_SELECTION_EVENTS:
+            commandButton.bind("<%s>" % selectionEvent, handler)
+
+
+def _bindArrows(widget):
+    widget.bind("<Down>", _tabRight)
+    widget.bind("<Up>"  , _tabLeft)
+
+    widget.bind("<Right>",_tabRight)
+    widget.bind("<Left>" , _tabLeft)
+
+def _tabRight(event):
+    boxRoot.event_generate("<Tab>")
+
+def _tabLeft(event):
+    boxRoot.event_generate("<Shift-Tab>")
+
+
+def __buttonEvent(event):
+    """
+    Handle an event that is generated by a person clicking a button.
+    """
+    global  boxRoot, __widgetTexts, __replyButtonText
+    __replyButtonText = __widgetTexts[event.widget]
+    boxRoot.quit() # quit the main loop
+
+
+
+
+def __fillablebox(msg
+    , title=""
+    , default=""
+    , mask=None
+    , root=None
+    ):
+    """
+    Show a box in which a user can enter some text.
+    You may optionally specify some default text, which will appear in the
+    enterbox when it is displayed.
+    Returns the text that the user entered, or None if he cancels the operation.
+    """
+
+    global boxRoot, __enterboxText, __enterboxDefaultText
+    global cancelButton, entryWidget, okButton
+
+    if title == None: title == ""
+    if default == None: default = ""
+    __enterboxDefaultText = default
+    __enterboxText        = __enterboxDefaultText
+
+    if root:
+        root.withdraw()
+        boxRoot = Toplevel(master=root)
+        boxRoot.withdraw()
+    else:
+        boxRoot = Tk()
+        boxRoot.withdraw()
+
+    boxRoot.protocol('WM_DELETE_WINDOW', _denyWindowManagerClose )
+    boxRoot.title(title)
+    boxRoot.iconname('Dialog')
+    boxRoot.geometry(rootWindowPosition)
+    boxRoot.bind("<Escape>", __enterboxCancel)
+
+    # ------------- define the messageFrame ---------------------------------
+    messageFrame = Frame(master=boxRoot)
+    messageFrame.pack(side=TOP, fill=BOTH)
+
+    # ------------- define the buttonsFrame ---------------------------------
+    buttonsFrame = Frame(master=boxRoot)
+    buttonsFrame.pack(side=TOP, fill=BOTH)
+
+
+    # ------------- define the entryFrame ---------------------------------
+    entryFrame = Frame(master=boxRoot)
+    entryFrame.pack(side=TOP, fill=BOTH)
+
+    # ------------- define the buttonsFrame ---------------------------------
+    buttonsFrame = Frame(master=boxRoot)
+    buttonsFrame.pack(side=TOP, fill=BOTH)
+
+    #-------------------- the msg widget ----------------------------
+    messageWidget = Message(messageFrame, width="4.5i", text=msg)
+    messageWidget.configure(font=(PROPORTIONAL_FONT_FAMILY,PROPORTIONAL_FONT_SIZE))
+    messageWidget.pack(side=RIGHT, expand=1, fill=BOTH, padx='3m', pady='3m')
+
+    # --------- entryWidget ----------------------------------------------
+    entryWidget = Entry(entryFrame, width=40)
+    _bindArrows(entryWidget)
+    entryWidget.configure(font=(PROPORTIONAL_FONT_FAMILY,TEXT_ENTRY_FONT_SIZE))
+    if mask:
+        entryWidget.configure(show=mask)
+    entryWidget.pack(side=LEFT, padx="3m")
+    entryWidget.bind("<Return>", __enterboxGetText)
+    entryWidget.bind("<Escape>", __enterboxCancel)
+    # put text into the entryWidget
+    entryWidget.insert(0,__enterboxDefaultText)
+
+    # ------------------ ok button -------------------------------
+    okButton = Button(buttonsFrame, takefocus=1, text="OK")
+    _bindArrows(okButton)
+    okButton.pack(expand=1, side=LEFT, padx='3m', pady='3m', ipadx='2m', ipady='1m')
+
+    # for the commandButton, bind activation events to the activation event handler
+    commandButton  = okButton
+    handler = __enterboxGetText
+    for selectionEvent in STANDARD_SELECTION_EVENTS:
+        commandButton.bind("<%s>" % selectionEvent, handler)
+
+
+    # ------------------ cancel button -------------------------------
+    cancelButton = Button(buttonsFrame, takefocus=1, text="Cancel")
+    _bindArrows(cancelButton)
+    cancelButton.pack(expand=1, side=RIGHT, padx='3m', pady='3m', ipadx='2m', ipady='1m')
+
+    # for the commandButton, bind activation events to the activation event handler
+    commandButton  = cancelButton
+    handler = __enterboxCancel
+    for selectionEvent in STANDARD_SELECTION_EVENTS:
+        commandButton.bind("<%s>" % selectionEvent, handler)
+
+    # ------------------- time for action! -----------------
+    entryWidget.focus_force()    # put the focus on the entryWidget
+    boxRoot.deiconify()
+    boxRoot.mainloop()  # run it!
+
+    # -------- after the run has completed ----------------------------------
+    if root: root.deiconify()
+    boxRoot.destroy()  # button_click didn't destroy boxRoot, so we do it now
+    return __enterboxText
+
+
+def __enterboxGetText(event):
+    global __enterboxText
+
+    __enterboxText = entryWidget.get()
+    boxRoot.quit()
+
+
+def __enterboxRestore(event):
+    global entryWidget
+
+    entryWidget.delete(0,len(entryWidget.get()))
+    entryWidget.insert(0, __enterboxDefaultText)
+
+
+def __enterboxCancel(event):
+    global __enterboxText
+
+    __enterboxText = None
+    boxRoot.quit()
