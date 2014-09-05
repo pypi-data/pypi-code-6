@@ -1,0 +1,141 @@
+# -*- coding: utf-8 -*-
+from collective.liveblog.adapters import IMicroUpdateContainer
+from collective.liveblog.adapters import MicroUpdate
+from collective.liveblog.interfaces import IBrowserLayer
+from collective.liveblog.testing import INTEGRATION_TESTING
+from datetime import datetime
+from datetime import timedelta
+from plone import api
+from time import sleep
+from time import time
+from zope.event import notify
+from zope.interface import alsoProvides
+from zope.lifecycleevent import ObjectModifiedEvent
+
+import unittest
+
+
+class ViewTestCase(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def _create_updates(self):
+        """Create 20 micro-updates. Note the use of the sleep method to avoid
+        doing this so fast that we ended with the same timestamp on different
+        updates."""
+        adapter = IMicroUpdateContainer(self.liveblog)
+        for i in range(1, 11):
+            sleep(0.05)
+            adapter.add(MicroUpdate(str(i), str(i)))
+
+        self.timestamp = str(time())
+
+        for i in range(11, 21):
+            sleep(0.05)
+            adapter.add(MicroUpdate(str(i), str(i)))
+
+        # update Liveblog modification time to invalidate the cache
+        notify(ObjectModifiedEvent(self.liveblog))
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        alsoProvides(self.request, IBrowserLayer)
+        with api.env.adopt_roles(['Manager']):
+            self.liveblog = api.content.create(
+                self.portal, 'Liveblog', 'liveblog')
+
+
+class DefaultViewTestCase(ViewTestCase):
+
+    def setUp(self):
+        super(DefaultViewTestCase, self).setUp()
+        self.view = api.content.get_view('view', self.liveblog, self.request)
+
+    def test_updates(self):
+        self.assertEqual(len(self.view._updates()), 0)
+        self._create_updates()
+        self.assertEqual(len(self.view._updates()), 20)
+
+    def test_has_updates(self):
+        self.assertFalse(self.view.has_updates)
+        self._create_updates()
+        self.assertTrue(self.view.has_updates)
+
+    def test_automatic_updates_enabled(self):
+        self.assertFalse(self.view.automatic_updates_enabled)
+        api.content.transition(self.liveblog, 'activate')
+        self.assertTrue(self.view.automatic_updates_enabled)
+        api.content.transition(self.liveblog, 'inactivate')
+        self.assertFalse(self.view.automatic_updates_enabled)
+
+
+class UpdateViewTestCase(ViewTestCase):
+
+    def setUp(self):
+        super(UpdateViewTestCase, self).setUp()
+        self.view = api.content.get_view('update', self.liveblog, self.request)
+
+    def test_view_listed_in_actions(self):
+        portal_types = api.portal.get_tool('portal_types')
+        actions = portal_types['Liveblog'].listActions()
+        actions = [a.id for a in actions]
+        self.assertIn('update', actions)
+
+
+class RecentUpdatesViewTestCase(ViewTestCase):
+
+    def setUp(self):
+        super(RecentUpdatesViewTestCase, self).setUp()
+        self.view = api.content.get_view(
+            'recent-updates', self.liveblog, self.request)
+
+    def test_needs_hard_refresh(self):
+        # calling the method without a timestamp will return False
+        self.assertFalse(self.view._needs_hard_refresh())
+        # a deletion happened before last update; we already handled it
+        self.liveblog._last_microupdate_deletion = str(time() - 120)
+        self.assertFalse(self.view._needs_hard_refresh())
+        # a deletion happened after last update; we need to handle it
+        self.liveblog._last_microupdate_deletion = str(time() - 30)
+        self.assertTrue(self.view._needs_hard_refresh())
+        self.assertEqual(self.request.RESPONSE.getStatus(), 205)
+
+    def test_if_modified_since_request_handler(self):
+        RFC1123 = '%a, %d %b %Y %H:%M:%S GMT'
+        # calling the method without header will return False
+        assert not self.request.get_header('If-Modified-Since')
+        self.assertFalse(self.view._if_modified_since_request_handler())
+        # invalid date return False
+        self.request.environ['IF_MODIFIED_SINCE'] = 'invalid'
+        assert self.request.get_header('If-Modified-Since') == 'invalid'
+        self.assertFalse(self.view._if_modified_since_request_handler())
+        # modified, return False as we must update
+        if_modified_since = datetime.utcnow() - timedelta(seconds=60)
+        if_modified_since = if_modified_since.strftime(RFC1123)
+        self.request.environ['IF_MODIFIED_SINCE'] = if_modified_since
+        self.assertFalse(self.view._if_modified_since_request_handler())
+        # not modified, return True and set header
+        if_modified_since = datetime.utcnow() + timedelta(seconds=60)
+        if_modified_since = if_modified_since.strftime(RFC1123)
+        self.request.environ['IF_MODIFIED_SINCE'] = if_modified_since
+        self.assertTrue(self.view._if_modified_since_request_handler())
+        self.assertEqual(self.request.RESPONSE.getStatus(), 304)
+
+    def test_updates_since_timestamp(self):
+        self._create_updates()
+        # before all elements are created
+        timestamp = str(time() - 60)
+        self.assertEqual(len(self.view._updates_since_timestamp(timestamp)), 20)
+        # middle of the creation
+        self.assertEqual(len(self.view._updates_since_timestamp(self.timestamp)), 10)
+        # after all elements were created
+        timestamp = str(time() + 60)
+        self.assertEqual(len(self.view._updates_since_timestamp(timestamp)), 0)
+
+        updates = self.view._updates_since_timestamp(self.timestamp)
+        updates = [u['title'] for u in updates]
+        self.assertIn('20', updates)
+        self.assertIn('11', updates)
+        self.assertNotIn('10', updates)
+        self.assertNotIn('1', updates)
