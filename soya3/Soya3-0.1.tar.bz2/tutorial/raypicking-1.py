@@ -1,0 +1,127 @@
+# -*- coding: utf-8 -*-
+
+# Soya 3D
+# Copyright (C) 2001-2014 Jean-Baptiste LAMY
+# http://www.lesfleursdunormal.fr/static/informatique/soya3d/index_en.html
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# raypicking-1: Laser
+
+# This lesson includes a red laser ray and 3 rotating cubes.
+# Move the mouse to move the laser.
+# In particular, lasers have been used while testing raypicking function.
+
+# BTW, the laser code (in soya/laser.py) is fully in Python and uses less that 60 lines
+# of code, so you might want to take a look at it.
+
+
+import sys, os, os.path, soya3 as soya, soya3.cube, soya3.laser, soya3.sdlconst
+
+soya.init()
+soya.path.append(os.path.join(os.path.dirname(sys.argv[0]), "data"))
+
+# Creates the scene.
+
+scene = soya.World()
+
+# Adds 3 rotating cubes in it (see basic-2.py about rotating body).
+
+cube_world = soya.cube.Cube()
+cube_model = cube_world.to_model()
+
+class RotatingCube(soya.Body):
+  def __init__(self, parent, angle_speed):
+    soya.Body.__init__(self, parent, cube_model)
+    self.angle_speed = angle_speed
+    
+  def advance_time(self, proportion):
+    self.rotate_z(0.2 * proportion * self.angle_speed)
+    
+cube_1 = RotatingCube(scene, 5.0)
+cube_1.set_xyz(-1.1, 0.5, 0.0)
+
+cube_2 = RotatingCube(scene, -5.0)
+cube_2.set_xyz(-1.5, -1.5, 0.0)
+
+cube_3 = RotatingCube(scene, 5.0)
+cube_3.set_xyz(1.1, -0.5, 0.0)
+cube_3.scale(0.5, 0.5, 0.5)
+
+# Adds a light.
+
+light = soya.Light(scene)
+light.set_xyz(0.0, 0.2, 1.0)
+
+# Creates a camera.
+
+camera = soya.Camera(scene)
+camera.set_xyz(0.0, -1.0, 3.0)
+
+soya.set_root_widget(camera)
+
+# Hide the mouse cursor
+
+soya.cursor_set_visible(0)
+
+
+# MouseLaser is a subclass of laser that is controlled by the mouse.
+
+class MouseLaser(soya.laser.Laser):
+  def begin_round(self):
+    soya.laser.Laser.begin_round(self)
+    
+    # Processes the events
+    
+    for event in soya.MAIN_LOOP.events:
+      if event[0] == soya.sdlconst.MOUSEMOTION:
+
+        # For mouse motion event, rotate the laser (quite) toward the mouse.
+        # The formulas are empirical; see soya.cursor for a better algorithm
+        # if you want to translate mouse positions into 3D coordinates.
+
+        mouse = soya.Point(
+          scene,
+          (float(event[1]) / soya.get_screen_width () - 0.5) *  4.0,
+          (float(event[2]) / soya.get_screen_height() - 0.5) * -4.0,
+          0.0,
+          )
+        self.look_at(mouse)
+      
+
+# Creates a red mouse-controlled laser, which reflect on walls.
+# You can change the laser color with laser.color = (r, g, b, a).
+
+laser = MouseLaser(scene, reflect = 1)
+laser.y = -2.5
+
+scene.x = 1.0
+
+# Main loop
+
+soya.MainLoop(scene).main_loop()
+
+
+# TODO (left as an exercice):
+# Turn this tutorial lesson into a full game, where the player must shoot
+# with the laser a specific target (or monsters).
+# The levels includes different moving and rotating obstacles.
+# A multiplayer version uses two laser, one for each player, and two targets.
+
+# Hint :
+# the laser.points list contains all the points that define the laser trajectory.
+# use laser.color to change the color of the laser.
+
+# Good luck!

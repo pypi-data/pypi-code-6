@@ -1,0 +1,108 @@
+# -*- coding: utf-8 -*-
+
+# Soya 3D
+# Copyright (C) 2001-2014 Jean-Baptiste LAMY
+# Copyright (C) 2004-2012 Marmoute - Pierre-Yves David - marmoute@nekeme.net
+# http://www.lesfleursdunormal.fr/static/informatique/soya3d/index_en.html
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+INTRO = """
+  You can also use Box Geometry for collision with GeomBox object
+"""
+
+import sys, os
+import soya3 as soya
+import soya3.sphere, soya3.cube
+
+#evil hack
+
+soya.init("ode-collision-9-box",width=1024,height=768)
+soya.path.append(os.path.join(os.path.dirname(sys.argv[0]), "data"))
+
+print(INTRO)
+
+# create world
+scene = soya.World()
+# getting material
+ground = soya.Material(soya.Image.get("block2.png"))
+metal  = soya.Material(soya.Image.get("metal1.png"))
+cube_mat   = soya.Material(soya.Image.get("chaume.png"))
+#blue_mat.separate_specular = 1
+# creating Model
+m_ball = soya.sphere.Sphere(None,metal).to_model()
+m_cube = soya.cube.Cube(None, cube_mat,size=3).to_model()
+m_ground = soya.cube.Cube(None, ground,size=78).to_model()
+#creating Body
+ground = soya.Body(scene,m_ground)
+ball   = soya.Body(scene,m_ball)
+cubes = []
+for i in range(15):
+  cubes.append(soya.Body(scene,m_cube))
+## Adding a mass ##
+ball_density = 50
+ground.pushable = False
+ground.gravity_mode = False
+ground.mass     = soya.SphericalMass(1)
+ball.mass       =soya.SphericalMass(ball_density)
+for cube in cubes:
+  cube.mass =soya.BoxedMass(0.01, 3, 3, 3)
+scene.gravity = soya.Vector(scene,0,-9.8,0)
+#Adding Geom
+ball.bounciness = 1
+soya.GeomSphere(ball)
+for cube in cubes:
+  soya.GeomBox(cube,(3,3,3))
+soya.GeomBox(ground,(78,78,78))
+
+  
+######
+#placing bodys
+ground.y-= 39
+ball.z   = 10
+ball.y   = 0.6
+ball.x   = -1
+
+cubes[0].set_xyz(   0,14.0,0)
+cubes[1].set_xyz(-1.6, 10.90,0)
+cubes[2].set_xyz( 1.6, 10.90,0)
+cubes[3].set_xyz(-3.2, 7.80,0)
+cubes[4].set_xyz(   0, 7.80,0)
+cubes[5].set_xyz( 3.2, 7.80,0)
+cubes[6].set_xyz(-4.8, 4.70,0)
+cubes[7].set_xyz(-1.6, 4.70,0)
+cubes[8].set_xyz( 1.6, 4.70,0)
+cubes[9].set_xyz( 4.8, 4.70,0)
+cubes[10].set_xyz(-6.4,1.60,0)
+cubes[11].set_xyz(-3.2,1.60,0)
+cubes[12].set_xyz(   0,1.60,0)
+cubes[13].set_xyz( 3.2,1.60,0)
+cubes[14].set_xyz( 6.4,1.60,0)
+
+
+
+ball.add_force(soya.Vector(scene,ball_density*-50,0,ball_density*-2500))
+
+#placing light over the duel
+light = soya.Light(scene)
+light.set_xyz(-10, 45,45)
+# adding camera
+camera = soya.Camera(scene)
+camera.set_xyz(13,15,30)
+camera.look_at(cubes[4])
+camera.back=300
+#running soya
+soya.set_root_widget(camera)
+ml = soya.MainLoop(scene)
+ml.main_loop()
