@@ -1,0 +1,1 @@
+from .renderer import mako_renderer as renderer
