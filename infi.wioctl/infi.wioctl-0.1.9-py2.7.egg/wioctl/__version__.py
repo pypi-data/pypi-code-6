@@ -1,0 +1,10 @@
+__version__ = "0.1.9"
+__git_commiter_name__ = "Shai Keren"
+__git_commiter_email__ = "shaik@infinidat.com"
+__git_branch__ = '(detached from v0.1.9)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '5003663b96436761a99f523f2759d8767a816b87'
+__git_head_subject__ = 'HIP-1248 added FSCTL_EXTEND_VOLUME'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
