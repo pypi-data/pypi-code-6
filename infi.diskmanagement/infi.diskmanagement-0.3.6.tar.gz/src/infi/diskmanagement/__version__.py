@@ -1,0 +1,10 @@
+__version__ = "0.3.6"
+__git_commiter_name__ = "Shai Keren"
+__git_commiter_email__ = "shaik@infinidat.com"
+__git_branch__ = '(detached from v0.3.6)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'ed6a31a1e8bfb4ae39c41a090fa332f50a1d7007'
+__git_head_subject__ = 'HIP-1246 added support in FSCTL_EXTEND_VOLUME + bugfix in ioctl_disk_update_drive_size'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
