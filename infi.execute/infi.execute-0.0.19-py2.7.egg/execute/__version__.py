@@ -1,0 +1,10 @@
+__version__ = "0.0.19"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.0.19)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '6f51484ad2acad227b0cd2ba51eb36e3e8691ccb'
+__git_head_subject__ = 'Finished release v0.0.19.'
+__git_head_message__ = '* release/v0.0.19:\n  fixing NameError in previous commit\n  HOSTDEV-1757'
+__git_dirty_diff__ = ''
