@@ -1,0 +1,10 @@
+__version__ = "0.1.31"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.1.31)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '722bd2f469cb1c6eb7c5b97c53e657711469103a'
+__git_head_subject__ = 'Finished release v0.1.31.'
+__git_head_message__ = '* release/v0.1.31:\n  STORAGEMODEL-300 disabling hbaapi generator on non-windows systems\n  HIP-1254\n  Bump python version'
+__git_dirty_diff__ = ''
