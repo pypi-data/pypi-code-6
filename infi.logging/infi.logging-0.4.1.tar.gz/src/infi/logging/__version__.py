@@ -1,0 +1,10 @@
+__version__ = "0.4.1"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "tal.yalon@gmail.com"
+__git_branch__ = '(detached from v0.4.1)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '412417c4ccd136f895a0543ff27e5743d498b071'
+__git_head_subject__ = 'optional title in request_id_tag context'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
