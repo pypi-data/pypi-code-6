@@ -1,0 +1,10 @@
+__version__ = "0.5.9"
+__git_commiter_name__ = "Arnon Yaari"
+__git_commiter_email__ = "arnony@infinidat.com"
+__git_branch__ = '(detached from v0.5.9)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '457eb6a1c9969be961e96ebaa571f343e7e3fb3b'
+__git_head_subject__ = 'fix tests'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
