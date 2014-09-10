@@ -1,0 +1,10 @@
+__version__ = "0.2.30"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.30)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'ece33ae9e5eb5fe9a22f49a35f750b026140cbe0'
+__git_head_subject__ = 'Finished release v0.2.30.'
+__git_head_message__ = '* release/v0.2.30: (23 commits)\n  HIP-1286 adding tests for WindowsSCSIModel._iter\n  HIP-1286 adding tests for is_disk_visible_in_device_manager\n  HIP-1286\n  HIP-1251 fixing previous commit for this issue\n  STORAGEMODEL-299 fixing AttributeError\n  TRIVIAL fixing syntax error\n  STORAGEMODEL-295 refactoring is_scsi_generic_device_online to return True if the device either responds to TUR/STD-INQ, and get_luns_from_report_luns return an empty set if the lun0 device does not exist\n  HIP-1251\n  STORAGEMODEL-299 refactoring WindowsSCSIModel.get_all_scsi_block_devices and WindowsNativeMultipathModel.get_all_multipath_block_devices\n  STORAGEMODEL-298\n  STORAGEMODEL-297\n  STORAGEMODEL-296\n  STORAGEMODEL-295\n  TRIVIAL fixing SyntaxError\n  HIP-1251 previous commit did not fix it, trying again\n  STORAGEMODEL-293\n  HIP-1251 InfinidatVolumeExists: checking if 0x83 in support inquiry pages dict, due to a weird behaviour in redhat-5\n  HIP-1246 resize now updates the volume size as well\n  TRIVIAL more logging\n  HOSTDEV-1740 VMwareInquiryInformationMixin.get_scsi_standard_inquiry: adapting to StandardInquiryDataBuffer\n  ...'
+__git_dirty_diff__ = ''
