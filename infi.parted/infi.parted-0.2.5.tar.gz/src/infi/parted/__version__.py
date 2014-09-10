@@ -1,0 +1,10 @@
+__version__ = "0.2.5"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.5)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '1090666b2a6326b75344be0bbbf9d16619d10fa2'
+__git_head_subject__ = 'Finished release v0.2.5.'
+__git_head_message__ = "* release/v0.2.5:\n  TRIVIAL adding logs\n  HIP-1266 increasing the timeout to 120 seconds\n  HIP-1266\n  STORAGEMODEL-294 another workaround for the issue on redhat-7\n  STORAGEMODEL-294\n  HIP-1258 Partition.get_filesystem_name uses blkid when the partition type is not available in parted\n  HIP-1235 logging parted's stderr and stdout"
+__git_dirty_diff__ = ''
