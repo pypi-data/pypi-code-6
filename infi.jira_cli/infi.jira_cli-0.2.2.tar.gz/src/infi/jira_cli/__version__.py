@@ -1,0 +1,10 @@
+__version__ = "0.2.2"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.2)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '8e84a5ddb266f607a311ebf73426bb80a3d2522a'
+__git_head_subject__ = 'summary'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
