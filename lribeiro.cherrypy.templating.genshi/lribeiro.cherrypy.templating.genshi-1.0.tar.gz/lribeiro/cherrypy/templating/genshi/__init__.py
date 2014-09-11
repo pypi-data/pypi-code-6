@@ -1,0 +1,1 @@
+from .renderer import genshi_renderer as renderer
