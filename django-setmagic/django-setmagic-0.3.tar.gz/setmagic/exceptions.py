@@ -1,0 +1,2 @@
+class NoSuchSettingError(AttributeError):
+    pass
