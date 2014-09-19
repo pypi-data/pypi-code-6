@@ -1,0 +1,9 @@
+import os
+
+MAGIC_IDENTIFIER = '  V2'
+HEARTBEAT_RESPONSE = '_heartbeat_'
+PASSIVE_ERROR_LIST = (
+    'E_FIN_FAILED',
+    'E_REQ_FAILED',
+    'E_TOUCH_FAILED',
+)
