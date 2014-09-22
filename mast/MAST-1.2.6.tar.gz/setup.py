@@ -1,0 +1,298 @@
+########################################################################
+# This is the setup script for the MAterials Simulation Toolkit (MAST)
+# 
+# Maintainer: Tam Mayeshiba
+# Last updated: 2014-09-12
+########################################################################
+from setuptools.command.install import install
+from setuptools import setup, find_packages
+import sys
+import os
+import re
+
+
+###Python version check
+#print "Python version detected: %s" % sys.version_info
+if sys.version_info[0] < 2 or (sys.version_info[0] == 2 and sys.version_info[1] < 7) or (sys.version_info[0] == 2 and sys.version_info[1] == 7 and sys.version_info[2] < 3):
+    print "Python Version %d.%d.%d found" % (sys.version_info[0], sys.version_info[1], sys.version_info[2])
+    print "Python version >= 2.7.1 needed!"
+    sys.exit(0)
+
+###Version load, adapted from http://stackoverflow.com/questions/2058802/how-can-i-get-the-version-defined-in-setup-py-setuptools-in-my-package/3619714#3619714
+PKG = "MAST"
+VERSIONFILE = os.path.join(PKG, "_version.py")
+verstr = "unknown"
+try:
+    verstrline = open(VERSIONFILE, "rt").read()
+except EnvironmentError:
+    pass # Okay, there is no version file.
+else:
+    VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
+    mo = re.search(VSRE, verstrline, re.M)
+    if mo:
+        verstr = mo.group(1)
+    else:
+        print "unable to find version in %s" % (VERSIONFILE,)
+        raise RuntimeError("if %s.py exists, it is required to be well-formed" % (VERSIONFILE,))
+
+
+###Set up home, and run setup
+
+myhome = os.getenv("HOME")
+setup(
+        name="MAST",
+        packages=find_packages(),
+        version=verstr,
+        install_requires=["numpy>=1.6.1", "scipy>=0.10.1", "pymatgen>=2.7.9", "custodian>=0.7.5"],
+        scripts=["MAST/bin/mast",
+                "MAST/bin/mast_diffusion_coefficient",
+                "MAST/bin/mast_finite_size_scaling_sizes",
+                "MAST/bin/mast_madelung_utility",
+                "MAST/bin/mast_defect_formation_energy"],
+        data_files=[
+            ("%s/MAST/examples" % myhome,
+                ["MAST/examples/README",
+                "MAST/examples/neb_with_phonons.inp",
+                "MAST/examples/finite_size_scaling.inp",
+                "MAST/examples/simple_optimization.inp",
+                "MAST/examples/u_ramping.inp",
+                "MAST/examples/defect_formation_energy.inp",
+                "MAST/examples/POSCAR.ga4as4"]),
+            ("%s/MAST/SCRATCH" % myhome,
+                ["MAST/initialization/README_Scratch"]),
+            ("%s/MAST/ARCHIVE" % myhome,
+                ["MAST/initialization/README_Archive"]),
+            ("%s/MAST/CONTROL" % myhome,
+                ["MAST/initialization/README_Control",
+                "MAST/initialization/submitlist",
+                "MAST/initialization/just_submitted",
+                "MAST/submit/runmast.py"]),
+        ],
+        package_data={
+            'MAST.submit.platforms.aci':['*.sh'],
+            'MAST.submit.platforms.bardeen':['*.sh'],
+            'MAST.submit.platforms.chtc':['*.sh','wrapper*','*mast*','test*','random*'],
+            'MAST.submit.platforms.dlx':['*.sh'],
+            'MAST.submit.platforms.korczak':['*.sh'],
+            'MAST.submit.platforms.no_queue_system':['*.sh'],
+            'MAST.submit.platforms.pbs_generic':['*.sh'],
+            'MAST.submit.platforms.sge_generic':['*.sh'],
+            'MAST.submit.platforms.slurm_generic':['*.sh'],
+            'MAST.submit.platforms.stampede':['*.sh'],
+            'MAST.submit.platforms.turnbull':['*.sh'],
+            'MAST.utility.gbdiff.bin':['*'],
+            'MAST.utility.gbdiff.data':['*'],
+            'MAST.utility.gbdiff.doc':['*'],
+            'MAST.utility.gbdiff.examples':['*'],
+            'MAST.utility.gbdiff.middleware':['*'],
+            'MAST.utility.gbdiff.rappture':['*'],
+            'MAST.utility.gbdiff.src':['*'],
+            'MAST.utility.diffanalyzer.bin':['*'],
+            'MAST.utility.diffanalyzer.data':['*'],
+            'MAST.utility.diffanalyzer.doc':['*'],
+            'MAST.utility.diffanalyzer.examples':['*'],
+            'MAST.utility.diffanalyzer.middleware':['*'],
+            'MAST.utility.diffanalyzer.rappture':['*'],
+            'MAST.utility.diffanalyzer.src':['*'],
+            'MAST.summary.citations':['*'],
+            'MAST.test.checker_test_base/files':['*'],
+            'MAST.test.checker_test_vasp/done_butnotconverged':['*'],
+            'MAST.test.checker_test_vasp/done_static_butnotconverged':['*'],
+            'MAST.test.checker_test_vasp/done_static':['*'],
+            'MAST.test.checker_test_vasp/done':['*'],
+            'MAST.test.checker_test_vasp/dynamics_split/phon_01':['*'],
+            'MAST.test.checker_test_vasp/dynamics_split/phon_02':['*'],
+            'MAST.test.checker_test_vasp/dynamics_split/phon_03':['*'],
+            'MAST.test.checker_test_vasp/dynamics':['*'],
+            'MAST.test.checker_test_vasp/energy':['*'],
+            'MAST.test.checker_test_vasp/files':['*'],
+            'MAST.test.checker_test_vasp/notdone_notconverged':['*'],
+            'MAST.test.checker_test_vasp/notdone_static_notconverged':['*'],
+            'MAST.test.checker_test_vasp/notready1':['*'],
+            'MAST.test.checker_test_vasp/notready2':['*'],
+            'MAST.test.checker_test_vasp/notready3':['*'],
+            'MAST.test.checker_test_vasp/notready4':['*'],
+            'MAST.test.checker_test_vasp/notready5':['*'],
+            'MAST.test.checker_test_vasp/ready':['*'],
+            'MAST.test.checker_test_vasp/started':['*'],
+            'MAST.test.checker_test_vasp/structure':['*'],
+            'MAST.test.checker_test_vasp/withdir':['*'],
+            'MAST.test.checker_test_vaspneb/done/00':['*'],
+            'MAST.test.checker_test_vaspneb/done/01':['*'],
+            'MAST.test.checker_test_vaspneb/done/02':['*'],
+            'MAST.test.checker_test_vaspneb/done/03':['*'],
+            'MAST.test.checker_test_vaspneb/done/04':['*'],
+            'MAST.test.checker_test_vaspneb/files':['*'],
+            'MAST.test.checker_test_vaspneb/notready1/00':['*'],
+            'MAST.test.checker_test_vaspneb/notready1/01':['*'],
+            'MAST.test.checker_test_vaspneb/notready1/02':['*'],
+            'MAST.test.checker_test_vaspneb/notready1/03':['*'],
+            'MAST.test.checker_test_vaspneb/notready1/04':['*'],
+            'MAST.test.checker_test_vaspneb/notready2/00':['*'],
+            'MAST.test.checker_test_vaspneb/notready2/01':['*'],
+            'MAST.test.checker_test_vaspneb/notready2/02':['*'],
+            'MAST.test.checker_test_vaspneb/notready2/03':['*'],
+            'MAST.test.checker_test_vaspneb/notready2/04':['*'],
+            'MAST.test.checker_test_vaspneb/notready3/00':['*'],
+            'MAST.test.checker_test_vaspneb/notready3/01':['*'],
+            'MAST.test.checker_test_vaspneb/notready3/02':['*'],
+            'MAST.test.checker_test_vaspneb/notready3/03':['*'],
+            'MAST.test.checker_test_vaspneb/notready3/04':['*'],
+            'MAST.test.checker_test_vaspneb/notready4/00':['*'],
+            'MAST.test.checker_test_vaspneb/notready4/01':['*'],
+            'MAST.test.checker_test_vaspneb/notready4/02':['*'],
+            'MAST.test.checker_test_vaspneb/notready4/03':['*'],
+            'MAST.test.checker_test_vaspneb/notready4/04':['*'],
+            'MAST.test.checker_test_vaspneb/notready5/00':['*'],
+            'MAST.test.checker_test_vaspneb/notready5/02':['*'],
+            'MAST.test.checker_test_vaspneb/notready5/03':['*'],
+            'MAST.test.checker_test_vaspneb/notready5/04':['*'],
+            'MAST.test.checker_test_vaspneb/notready6/00':['*'],
+            'MAST.test.checker_test_vaspneb/notready6/01':['*'],
+            'MAST.test.checker_test_vaspneb/notready6/03':['*'],
+            'MAST.test.checker_test_vaspneb/notready6/04':['*'],
+            'MAST.test.checker_test_vaspneb/notready7/00':['*'],
+            'MAST.test.checker_test_vaspneb/notready7/01':['*'],
+            'MAST.test.checker_test_vaspneb/notready7/02':['*'],
+            'MAST.test.checker_test_vaspneb/notready7/03':['*'],
+            'MAST.test.checker_test_vaspneb/notready7/04':['*'],
+            'MAST.test.checker_test_vaspneb/ready/00':['*'],
+            'MAST.test.checker_test_vaspneb/ready/01':['*'],
+            'MAST.test.checker_test_vaspneb/ready/02':['*'],
+            'MAST.test.checker_test_vaspneb/ready/03':['*'],
+            'MAST.test.checker_test_vaspneb/ready/04':['*'],
+            'MAST.test.checker_test_vaspneb/started/00':['*'],
+            'MAST.test.checker_test_vaspneb/started/01':['*'],
+            'MAST.test.checker_test_vaspneb/started/02':['*'],
+            'MAST.test.checker_test_vaspneb/started/03':['*'],
+            'MAST.test.checker_test_vaspneb/started/04':['*'],
+            'MAST.test.checker_test_vaspneb/structures':['*'],
+            'MAST.test.chop_test_complete/files':['*'],
+            'MAST.test.chop_test_complete/writedir/single_label1/00':['*'],
+            'MAST.test.chop_test_complete/writedir/single_label1/01':['*'],
+            'MAST.test.chop_test_complete/writedir/single_label1/02':['*'],
+            'MAST.test.chop_test_complete/writedir/single_label1/03':['*'],
+            'MAST.test.chop_test_complete/writedir/single_label1/04':['*'],
+            'MAST.test.chop_test_ready/files':['*'],
+            'MAST.test.chop_test_run/files':['*'],
+            'MAST.test.chop_test_update/files':['*'],
+            'MAST.test.chop_test_write/files':['*'],
+            'MAST.test.chop_test_write/ready/00':['*'],
+            'MAST.test.chop_test_write/ready/01':['*'],
+            'MAST.test.chop_test_write/ready/02':['*'],
+            'MAST.test.chop_test_write/ready/03':['*'],
+            'MAST.test.chop_test_write/ready/04':['*'],
+            'MAST.test.chop_test_write/statfiles':['*'],
+            'MAST.test.chop_test_write/unsorted':['*'],
+            'MAST.test.chop_test_write/writedir':['*'],
+            'MAST.test.custom_test':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group1_q=n1_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group1_q=n1_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group1_q=n2_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group1_q=n2_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group1_q=n3_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group1_q=n3_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group1_q=p0_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group1_q=p0_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group2_q=p0_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group2_q=p0_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group3_q=p0_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group3_q=p0_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group3_q=p1_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group3_q=p1_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group3_q=p2_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/defect_group3_q=p2_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/inducedefect_group1':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/inducedefect_group2':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/inducedefect_group3':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/perfect_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626/perfect_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group1_q=n1_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group1_q=n1_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group1_q=n2_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group1_q=n2_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group1_q=n3_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group1_q=n3_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group1_q=p0_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group1_q=p0_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group2_q=p0_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group2_q=p0_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group3_q=p0_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group3_q=p0_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group3_q=p1_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group3_q=p1_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group3_q=p2_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/defect_group3_q=p2_sp':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/dfe_ingredient':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/inducedefect_group1':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/inducedefect_group2':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/inducedefect_group3':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/perfect_opt':['*'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427/perfect_sp':['*'],
+            'MAST.test.defect_formation_energy_test/compare_results':['*'],
+            'MAST.test.defect_formation_energy_test/old_compare_results':['*'],
+            'MAST.test.fss_enevsvm_test':['*'],
+            'MAST.test.fss_gensc_test':['*'],
+            'MAST.test.fss_recipe_test':['*'],
+            'MAST.test.fss_simple_test':['*'],
+            'MAST.test.fss_structure_test':['*'],
+            'MAST.test.gatest':['*'],
+            'MAST.test.inputparser_test':['*'],
+            'MAST.test.lammpstest/lammps_anneal_test':['*'],
+            'MAST.test.mast_test':['*'],
+            'MAST.test.optimize_vasp_custom_test':['*'],
+            'MAST.test.optimize_workflow_test':['*'],
+            'MAST.test.phononreorgtest':['*'],
+            'MAST.test.recipeparser_test/compare':['*'],
+            'MAST.test.recipeplan_test/files':['*'],
+            'MAST.test.recipeplan_test/recipedir/ing1':['*'],
+            'MAST.test.recipeplan_test/recipedir/ing2a':['*'],
+            'MAST.test.recipeplan_test/recipedir/ing2b':['*'],
+            'MAST.test.recipeplan_test/recipedir/ing3':['*'],
+            'MAST.test.recipeplan_test/test_control':['*'],
+            'MAST.test.recipesetup_test':['*'],
+            'MAST.test.recipeutility_test':['*'],
+            'MAST.test.structure_extensions_test':['*'],
+            'MAST.test.checker_test_vasp/dynamics_split':['X*','D*'],
+            'MAST.test.checker_test_vaspneb/done':['I*','K*','P*','s*','t*','v*','m*','C*'],
+            'MAST.test.checker_test_vaspneb/notready1':['I*','P*','s*'],
+            'MAST.test.checker_test_vaspneb/notready2':['I*','K*','P*'],
+            'MAST.test.checker_test_vaspneb/notready3':['I*','K*','P*','s*'],
+            'MAST.test.checker_test_vaspneb/notready4':['K*','P*','s*'],
+            'MAST.test.checker_test_vaspneb/notready6':['I*','K*','P*','s*'],
+            'MAST.test.checker_test_vaspneb/notready6':['I*','K*','P*','s*'],
+            'MAST.test.checker_test_vaspneb/notready7':['I*','K*','P*','s*'],
+            'MAST.test.checker_test_vaspneb/ready':['I*','K*','P*','s*'],
+            'MAST.test.checker_test_vaspneb/started':['I*','K*','P*','s*','t*','v*','m*','C*'],
+            'MAST.test.chop_test_complete/writedir':['metadata.txt'],
+            'MAST.test.chop_test_complete/writedir/single_label1':['metadata.txt'],
+            'MAST.test.chop_test_write/ready':['I*','K*','P*','s*'],
+            'MAST.test.defect_formation_energy_test':['*.inp','P*','*.txt'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T211626':['*.txt','*.inp'],
+            'MAST.test.defect_formation_energy_test/archive/GaAs_defects_AsGa_recipe_defects_20131125T220427':['*.txt','*.inp'],
+            'MAST.test.lammpstest':['*.meam','*.txt','*.test','*.tar','*.tersoff','*.inp'],
+            'MAST.test.recipeparser_test':['*.txt','*.inp'],
+            'MAST.test.recipeplan_test/recipedir':['mast_recipe.log','metadata.txt'],
+        },
+        author="MAST Development Team, University of Wisconsin-Madison Computational Materials Group",
+        author_email="ddmorgan@wisc.edu",
+        #maintainer="Tam Mayeshiba",
+        url="https://materialshub.org",
+        license="MIT",
+        description="MAterials Simulation Toolkit",
+        long_description="MAterials Simulation Toolkit for diffusion and defects",
+        keywords=["MAST","materials","simulation","diffusion","defects","ab initio","high throughput", "DFT", "density functional theory", "defect formation"],
+        #cmdclass={'build_py': build_py}
+)
+
+print "***************************"
+print "        ATTENTION!         "
+print "***************************"
+print "Please see the MAST documentation at http://pythonhosted.org/MAST"
+print "in order to set up the following environment variables:"
+print "MAST_SCRATCH"
+print "MAST_ARCHIVE"
+print "MAST_CONTROL"
+print "MAST_PLATFORM"
+print "(optionally, VASP_PSP_DIR)"
+
