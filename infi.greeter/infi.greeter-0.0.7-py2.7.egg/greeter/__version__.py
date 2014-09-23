@@ -1,0 +1,10 @@
+__version__ = "0.0.7"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.0.7)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'edaea9ca09a9edf0c7b68e41816887702d43664a'
+__git_head_subject__ = 'Finished release v0.0.7.'
+__git_head_message__ = '* release/v0.0.7:\n  buildout.cfg: adding install_greeter to console_scripts\n  buildout.cfg: removing install from console_scripts'
+__git_dirty_diff__ = ''
