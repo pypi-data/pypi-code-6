@@ -1,0 +1,7 @@
+__title__ = 'PyLit6'
+__summary__ = 'Literate Programming with reStructuredText'
+__url__ = 'http://www.pylit.org'
+__version__ = '0.1-dev'
+__author__ = 'Roie R. Black'
+__email__ = 'rblack@austincc.edu'
+__license__ = 'BSD 3-Clause'
