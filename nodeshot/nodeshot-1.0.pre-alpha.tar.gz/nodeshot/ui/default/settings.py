@@ -1,0 +1,7 @@
+from django.conf import settings
+from leaflet import app_settings as LEAFLET_SETTINGS
+
+
+TILESERVER_URL = LEAFLET_SETTINGS['TILES'][0][1]
+MAP_ZOOM = LEAFLET_SETTINGS['DEFAULT_ZOOM']
+MAP_CENTER = LEAFLET_SETTINGS['DEFAULT_CENTER']
