@@ -1,0 +1,1 @@
+from admintimestamps.base import TimestampedAdminMixin
