@@ -1,0 +1,62 @@
+import os
+import sys
+
+from setuptools import setup, find_packages
+
+
+def get_version():
+    repo_dir = os.path.dirname(__file__)
+    sys.path.insert(0, repo_dir)
+    import PyQt5
+    return PyQt5.__version__
+
+
+def get_package_data():
+    package_data = dict()
+
+    package_data['PyQt5'] = list()
+    for subdir in ("plugins/", "qml/", "uic/"):
+        abspath = os.path.abspath("PyQt5/" + subdir)
+        for root, dirs, files in os.walk(abspath):
+            for f in files:
+                fpath = os.path.join(root, f)
+                relpath = os.path.relpath(fpath, abspath)
+                relpath = relpath.replace("\\", "/")
+                package_data['PyQt5'].append(subdir + relpath)
+
+    package_data['PyQt5'].extend(["*.exe", "*.dll", "*.pyd"])
+    return package_data
+
+
+def get_readme():
+    with open('README.txt') as f:
+        readme = f.read()
+    return readme
+
+
+classifiers = [
+    'Development Status :: 3 - Alpha',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 2',
+    'Programming Language :: Python :: 2.7',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Topic :: Utilities'
+]
+
+
+setup(
+    name='python-qt5',
+    version=get_version(),
+    description='PyQt5',
+    long_description=get_readme(),
+    author='Marcus Ottosson',
+    author_email='marcus@abstractfactory.com',
+    url='https://github.com/pyqt/pyqt5',
+    license='GPLv3',
+    packages=find_packages(),
+    zip_safe=False,
+    classifiers=classifiers,
+    package_data=get_package_data()
+)
