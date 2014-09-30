@@ -1,0 +1,2 @@
+class Malformed(Exception):
+    pass
