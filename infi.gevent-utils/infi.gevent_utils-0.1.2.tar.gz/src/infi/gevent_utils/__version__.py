@@ -1,0 +1,10 @@
+__version__ = "0.1.2"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "tal.yalon@gmail.com"
+__git_branch__ = '(detached from v0.1.2)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'da33919238e38a92f022c47dfd8322e7d18bdb61'
+__git_head_subject__ = 'added shutil and walk for os and os.path'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
