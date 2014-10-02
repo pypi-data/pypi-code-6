@@ -1,0 +1,10 @@
+__version__ = "0.1.1"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "tal.yalon@gmail.com"
+__git_branch__ = '(detached from v0.1.1)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '33e8f8e263c72b191eec1f8ce011ce24cb47918b'
+__git_head_subject__ = 'os, path and tempfile gevent-friendly as well as other fixes'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
