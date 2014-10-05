@@ -1,0 +1,6 @@
+from django.utils.translation import ugettext
+from django.shortcuts import render
+
+
+def index(request):
+    return render(request, 'index.html', {'foo': ugettext('bar')})
