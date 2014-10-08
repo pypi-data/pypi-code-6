@@ -1,0 +1,146 @@
+# -*- coding: UTF-8 -*-
+
+try:
+    from ConfigParser import SafeConfigParser
+except ImportError:  # Python 3
+    from configparser import SafeConfigParser
+
+import base64
+from os import chmod
+from os.path import expanduser, isfile
+
+
+class DidelConfig(object):
+    """
+    A wrapper for Python's ConfigParser which uses paths instead of sections
+
+    It must be saved with ``.save()`` to be persistent.
+
+    >>> config = DidelConfig("foo.conf")
+    >>> config.set("foo", 45)
+    >>> config.get("foo")
+    "45"
+    >>> config.set("stuff.bar", "hello")
+    >>> config.get("stuff.bor")
+    None
+    >>> config.get("stuff.bar")
+    "hello"
+    >>> config.save()
+    """
+
+    SOURCE_FILE = expanduser('~/.didel.conf')
+    SECRET_SECTION = 'secret'
+    _default = None
+
+    @classmethod
+    def get_default(cls):
+        """
+        Get the default config object.
+        """
+        if not cls._default:
+            cls._default = cls()
+        return cls._default
+
+
+    def __init__(self, filename=SOURCE_FILE):
+        self.filename = filename
+        self.config = SafeConfigParser()
+        if not isfile(self.filename):
+            self.save()
+        self.load()
+
+
+    def load(self):
+        self.config.read(self.filename)
+
+
+    def save(self):
+        with open(self.filename, 'w') as f:
+            self.config.write(f)
+        chmod(self.filename, 0600)
+
+
+    def _split_path(self, key):
+        """
+        Split a key into a ``(section, key)`` tuple.
+        """
+        return key.split('.', 1) if '.' in key else ('DEFAULT', key)
+
+
+    def set(self, key, value, save=False):
+        """
+        Set a value. It creates the section if it doesn't exist
+
+        >>> config.set("foo.bar", "42")
+        """
+        section, key = self._split_path(key)
+        if not self.config.has_section(section):
+            self.config.add_section(section)
+        self.config.set(section, key, value)
+        if save:
+            self.save()
+        return self
+
+
+    def get(self, key):
+        """
+        Get a value. It returns ``None`` if it doesn't exist.
+
+        >>> config.get("foo.bar")
+        "42"
+        """
+        if not self.has_key(key):
+            return None
+        section, key = self._split_path(key)
+        return self.config.get(section, key)
+
+
+    def has_key(self, key):
+        """
+        Test if a key exist
+        """
+        section, key = self._split_path(key)
+        cfg = self.config
+        return cfg.has_section(section) and cfg.has_option(section, key)
+
+
+    def set_secret(self, key, value, save=False):
+        """
+        Same as ``set`` but use a simple encryption. If no section is
+        specified, it uses the secret one.
+        """
+        if '.' not in key:
+            key = '%s.%s' % (self.SECRET_SECTION, key)
+        return self.set(key, base64.b16encode(value), save)
+
+
+    def get_secret(self, key):
+        """
+        Same as ``get`` but use a simple encryption. If no section is
+        specified, it uses the secret one.
+        """
+        if '.' not in key:
+            key = '%s.%s' % (self.SECRET_SECTION, key)
+        value = self.get(key)
+        if value is not None:
+            return base64.b16decode(value)
+
+
+    def has_secret_key(self, key):
+        """
+        Same as ``has_key`` but for the secret section
+        """
+        if '.' not in key:
+            key = '%s.%s' % (self.SECRET_SECTION, key)
+        return self.has_key(key)
+
+
+    def items(self):
+        """
+        Yield all items from this config, as tuples of ``(key, value)``
+        """
+        for section in self.config.sections():
+            if section == self.SECRET_SECTION:
+                continue
+            for k, v in self.config.items(section):
+                yield ('%s.%s' % (section, k), v)
