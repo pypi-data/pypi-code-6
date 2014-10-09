@@ -1,0 +1,3 @@
+"""
+exercice_math
+"""
