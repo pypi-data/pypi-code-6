@@ -1,0 +1,15 @@
+__title__ = 'fobi.contrib.plugins.form_elements.content.text.apps'
+__author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
+__copyright__ = 'Copyright (c) 2014 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
+__all__ = ('Config',)
+
+try:
+    from django.apps import AppConfig
+
+    class Config(AppConfig):
+        label = 'fobi.contrib.plugins.form_elements.content.text'
+        name = 'fobi.contrib.plugins.form_elements.content.text'
+
+except ImportError:
+    pass
