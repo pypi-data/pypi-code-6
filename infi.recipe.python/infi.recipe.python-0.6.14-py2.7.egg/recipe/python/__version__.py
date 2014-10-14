@@ -1,0 +1,10 @@
+__version__ = "0.6.14"
+__git_commiter_name__ = "Tomer Galun"
+__git_commiter_email__ = "tomerg@infinidat.com"
+__git_branch__ = '(detached from v0.6.14)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '382e1cc8b540e2b4d139d8c43a377d2746abca85'
+__git_head_subject__ = 'HOSTDEV-1717 replace deprecated dist fixed'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
