@@ -1,0 +1,10 @@
+__version__ = "0.2.5"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.5)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '0f4979354a1cc2fe777fbf13278a7f5d10448120'
+__git_head_subject__ = 'Finished release v0.2.5.'
+__git_head_message__ = '* release/v0.2.5:\n  add python 3.4 to classifiers\n  add repr to CommandParams for easier debugging'
+__git_dirty_diff__ = ''
