@@ -1,0 +1,10 @@
+__version__ = "0.2.32"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.32)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '6972816f0628975381fd3597fe4b57d3bc1ca9b8'
+__git_head_subject__ = 'Finished release v0.2.32.'
+__git_head_message__ = '* release/v0.2.32:\n  STORAGEMODEL-302 don\'t do report luns on SCSI types other than disk/controller (skip CD-ROMs, printers and such)\n  tiny refactor\n  Revert "STORAGEMODEL-301 move check_for_scsi_errors out of errors.py"\n  STORAGEMODEL-301 move check_for_scsi_errors out of errors.py'
+__git_dirty_diff__ = ''
