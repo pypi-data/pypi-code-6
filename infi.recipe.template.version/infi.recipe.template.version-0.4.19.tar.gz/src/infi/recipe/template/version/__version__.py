@@ -1,0 +1,10 @@
+__version__ = "0.4.19"
+__git_commiter_name__ = "Tomer Galun"
+__git_commiter_email__ = "tomerg@infinidat.com"
+__git_branch__ = '(detached from v0.4.19)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'd0ec7c186089c48981cd8887128997d90576e845'
+__git_head_subject__ = 'HOSTDEV-1814 Sanitize commit message from mako special characters'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
