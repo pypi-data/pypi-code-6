@@ -1,0 +1,10 @@
+__version__ = "0.1.2"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.1.2)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '3bc8072b819c607bfbb4bc3996d9b18a8500695a'
+__git_head_subject__ = 'Finished release v0.1.2.'
+__git_head_message__ = '* release/v0.1.2:\n  updated CLI definitions\n  destroy property collector after use\n  refactor wait_for_tasks\n  refactor wait_for_tasks WIP\n  handle empty list in wait_for_tasks'
+__git_dirty_diff__ = ''
