@@ -1,0 +1,10 @@
+__version__ = "0.1.3"
+__git_commiter_name__ = "Arnon Yaari"
+__git_commiter_email__ = "arnony@infinidat.com"
+__git_branch__ = '(detached from v0.1.3)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'ab74710b425a59c50b4ca3b9664732e4f71bf9e8'
+__git_head_subject__ = 'bump python version'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
