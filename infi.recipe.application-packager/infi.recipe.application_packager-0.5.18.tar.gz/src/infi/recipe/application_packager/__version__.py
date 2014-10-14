@@ -1,0 +1,10 @@
+__version__ = "0.5.18"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.5.18)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '13793c8a20667b45ee9f2d6bf9c3ee83dddcc221'
+__git_head_subject__ = 'TRIVIAL fixing _apply_project_specific_on_top_of_platform_defaults'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
