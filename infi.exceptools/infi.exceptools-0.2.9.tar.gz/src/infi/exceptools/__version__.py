@@ -1,0 +1,10 @@
+__version__ = "0.2.9"
+__git_commiter_name__ = "Arnon Yaari"
+__git_commiter_email__ = "arnony@infinidat.com"
+__git_branch__ = '(detached from v0.2.9)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'c78bb47dfa439cd65fbc96bf97aa4dd9fbf7e9b9'
+__git_head_subject__ = 'Fix last commit'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
