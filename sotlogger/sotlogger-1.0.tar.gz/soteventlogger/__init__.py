@@ -1,0 +1,1 @@
+# Packages are simply folders with modules (py files) in them. They also have a special file called __init__.py so that Python will know that this folder is a package.
