@@ -1,0 +1,65 @@
+"""
+Nose plugin for easy testing of django projects and apps. Sets up a test
+database and installs apps from test settings file before tests are run.
+"""
+from nose.plugins import Plugin
+
+
+class SimpleFastDjango(Plugin):
+    """
+    Enable to set up Django test environment
+    before running all tests in a quick way.
+    """
+    name = 'sfd'
+
+    def configure(self, options, conf):
+        Plugin.configure(self, options, conf)
+        self.verbosity = 0
+
+    def begin(self):
+        """
+        Initialize the test environment then create the test database
+        and switch the connection over to that database.
+        """
+        import django
+        from django.conf import settings
+        from django.db import connection
+        from django.core import management
+        from django.test.utils import setup_test_environment
+
+        use_south = 'south' in settings.INSTALLED_APPS
+        if use_south:
+            from south import migration
+            from south.hacks import hacks
+
+        try:
+            self.original_db_name = settings.DATABASE_NAME
+        except AttributeError:  # Django > 1.2
+            self.original_db_name = settings.DATABASES['default']['NAME']
+
+        try:
+            django.setup()  # Django >= 1.7
+        except AttributeError:
+            pass
+        setup_test_environment()
+
+        if use_south:
+            management.get_commands()
+            hacks.patch_flush_during_test_db_creation()
+
+        connection.creation.create_test_db(self.verbosity)
+
+        if use_south:
+            for app in migration.all_migrations():
+                migration.migrate_app(app, verbosity=self.verbosity)
+
+    def finalize(self, result):
+        """
+        Teardown the test environment and destroy the test database.
+        """
+        from django.db import connection
+        from django.test.utils import teardown_test_environment
+
+        connection.creation.destroy_test_db(self.original_db_name,
+                                            self.verbosity)
+        teardown_test_environment()
