@@ -1,0 +1,10 @@
+__version__ = "0.1.4"
+__git_commiter_name__ = "Tal Yalon"
+__git_commiter_email__ = "tal.yalon@gmail.com"
+__git_branch__ = '(detached from v0.1.4)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'f8e7358f1215576e80c648d010caf04dcaaa89f5'
+__git_head_subject__ = 'TRIVIAL fixed bug in create_threadpool_func when wrapping a func where __doc__ is None'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
