@@ -1,0 +1,10 @@
+__version__ = "0.1"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.1)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'f298f7786c86f73e1da6bb3099e5f4e49524f4bc'
+__git_head_subject__ = 'adding cwd kwarg'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
