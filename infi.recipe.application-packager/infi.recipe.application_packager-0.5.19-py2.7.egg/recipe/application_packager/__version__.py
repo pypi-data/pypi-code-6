@@ -1,0 +1,10 @@
+__version__ = "0.5.19"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.5.19)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'e787512ad6a0077f77c68c309df16c7fc273d2cb'
+__git_head_subject__ = 'Finished release v0.5.19.'
+__git_head_message__ = '* release/v0.5.19:\n  TRIVIAL empty commit\n  COMVE-72 adding -g and -pthread to CCFLAGS and CXXFLAGS\n  TRIVIAL working on the tests'
+__git_dirty_diff__ = ''
