@@ -1,0 +1,2 @@
+from coinspot import CoinSpot
+
