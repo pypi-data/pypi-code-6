@@ -1,0 +1,10 @@
+__version__ = "0.2.33"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.2.33)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'cd5d78291c54df79718d5b98008ff683da8d8992'
+__git_head_subject__ = 'Finished release v0.2.33.'
+__git_head_message__ = '* release/v0.2.33:\n  Revert "Return vendor specific data from standard inquiry"\n  Return vendor specific data from standard inquiry\n  buildout.cfg: changed isolated python version to v2.7.6.20\n  buildout.cfg: changed isolated python version to v2.7.6.19\n  HIP-1340 adding docstrings\n  HIP-1338 adapting storagemodel to interface change in infi.exceptools\n  HIP-1334 changing method name to check_if_write_protected\n  HIP-1334 implementing InfiniBoxVolumeMixin.is_read_only\n  STORAGEMODEL-305 changing LinuxNativeMultipathBlockDevice.get_display_name\n  STORAGEMODEL-304 adding another test\n  STORAGEMODEL-304 implementing infi.storagemodel.infinidat.infinibox.wwn:InfinidatWWN'
+__git_dirty_diff__ = ''
