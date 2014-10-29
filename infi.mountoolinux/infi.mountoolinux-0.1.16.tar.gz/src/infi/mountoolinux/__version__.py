@@ -1,0 +1,10 @@
+__version__ = "0.1.16"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.1.16)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '320bc3501d70ade44eeda42607a7e562e475cd72'
+__git_head_subject__ = 'Finished release v0.1.16.'
+__git_head_message__ = '* release/v0.1.16:\n  buildout.cfg: changed isolated python version to v2.7.6.20\n  buildout.cfg: changed isolated python version to v2.7.6.19\n  HIP-1338 fixing another name erorr\n  HIP-1338 fixing typo\n  HIP-1338 ditching MountExceptionFactory, using exceptools'
+__git_dirty_diff__ = ''
