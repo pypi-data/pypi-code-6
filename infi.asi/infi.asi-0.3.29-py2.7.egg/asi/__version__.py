@@ -1,0 +1,10 @@
+__version__ = "0.3.29"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.3.29)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = 'df4a749343ce729ce9bf35936c68c04538af266a'
+__git_head_subject__ = 'Finished release v0.3.29.'
+__git_head_message__ = '* release/v0.3.29:\n  buildout.cfg: changed isolated python version to v2.7.6.20\n  buildout.cfg: changed isolated python version to v2.7.6.19\n  TRIVIAL fixing writes in win32\n  TRIVIAL fixing assertion in Write10Command'
+__git_dirty_diff__ = ''
