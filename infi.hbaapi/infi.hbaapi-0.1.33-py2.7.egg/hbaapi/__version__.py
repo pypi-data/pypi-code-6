@@ -1,0 +1,10 @@
+__version__ = "0.1.33"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.1.33)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '61844d0374920d60e375f843d5a527b6badc4818'
+__git_head_subject__ = 'Revert "HOSTDEV-1811 implement hbaapi for Solaris"'
+__git_head_message__ = 'This reverts commit 20acfcc8aa1ea9ba62b2170765b7b8a41fae498e.'
+__git_dirty_diff__ = ''
