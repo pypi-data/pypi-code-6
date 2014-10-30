@@ -1,0 +1,92 @@
+# coding: utf-8
+
+from __future__ import unicode_literals
+
+"""
+This module provides utility classes for io operations.
+"""
+
+__author__ = "Shyue Ping Ong, Rickard Armiento, Anubhav Jain, G Matteo"
+__copyright__ = "Copyright 2011, The Materials Project"
+__version__ = "1.0"
+__maintainer__ = "Shyue Ping Ong"
+__email__ = "shyuep@gmail.com"
+__status__ = "Production"
+__date__ = "Sep 23, 2011"
+
+import re
+import numpy
+import six
+
+
+def clean_lines(string_list, remove_empty_lines=True):
+    """
+    Strips whitespace, carriage returns and empty lines from a list of strings.
+
+    Args:
+        string_list: List of strings
+        remove_empty_lines: Set to True to skip lines which are empty after
+            stripping.
+
+    Returns:
+        List of clean strings with no whitespaces.
+    """
+
+    for s in string_list:
+        clean_s = s
+        if '#' in s:
+            ind = s.index('#')
+            clean_s = s[:ind]
+        clean_s = clean_s.strip()
+        if (not remove_empty_lines) or clean_s != '':
+            yield clean_s
+
+
+def micro_pyawk(filename, search, results=None, debug=None, postdebug=None):
+    """
+    Small awk-mimicking search routine.
+
+    'file' is file to search through.
+    'search' is the "search program", a list of lists/tuples with 3 elements;
+    i.e. [[regex,test,run],[regex,test,run],...]
+    'results' is a an object that your search program will have access to for
+    storing results.
+
+    Here regex is either as a Regex object, or a string that we compile into a
+    Regex. test and run are callable objects.
+
+    This function goes through each line in filename, and if regex matches that
+    line *and* test(results,line)==True (or test == None) we execute
+    run(results,match),where match is the match object from running
+    Regex.match.
+
+    The default results is an empty dictionary. Passing a results object let
+    you interact with it in run() and test(). Hence, in many occasions it is
+    thus clever to use results=self.
+
+    Author: Rickard Armiento
+
+    Returns:
+        results
+    """
+    if results is None:
+        results = {}
+
+    # Compile strings into regexs
+    for entry in search:
+        if isinstance(entry[0], str):
+            entry[0] = re.compile(entry[0])
+
+    with open(filename) as f:
+        for line in f:
+            for i in range(len(search)):
+                match = search[i][0].search(line)
+                if match and (search[i][1] is not None
+                              or search[i][1](results, line)):
+                    if debug is not None:
+                        debug(results, match)
+                    search[i][2](results, match)
+                    if postdebug is not None:
+                        postdebug(results, match)
+
+    return results
