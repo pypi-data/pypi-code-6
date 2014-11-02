@@ -1,0 +1,10 @@
+__version__ = "0.5.21"
+__git_commiter_name__ = "Shai Keren"
+__git_commiter_email__ = "shaik@infinidat.com"
+__git_branch__ = '(detached from v0.5.21)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '05b908dc9f6cfca2fa24bdda262da2ad56bfa4e3'
+__git_head_subject__ = 'HOSTDEV-1860 allow control in packaging whether to close processes during uninstall/upgrade on non-windows platforms'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
