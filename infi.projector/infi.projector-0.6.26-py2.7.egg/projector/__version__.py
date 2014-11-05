@@ -1,0 +1,10 @@
+__version__ = "0.6.26"
+__git_commiter_name__ = "Guy Rozendorn"
+__git_commiter_email__ = "guy@rzn.co.il"
+__git_branch__ = '(detached from v0.6.26)'
+__git_remote_tracking_branch__ = '(No remote tracking)'
+__git_remote_url__ = '(Not remote tracking)'
+__git_head_hash__ = '740a9340c478be6359b8a292e8ff9538a6677150'
+__git_head_subject__ = 'Finished release v0.6.26.'
+__git_head_message__ = '* release/v0.6.26:\n  HOSTDEV-1866 fixing bootstrap.py to handle the case the setuptools version in the local python is not the same one as bootstrap.py downloaded\n  buildout.cfg: changed isolated python version to v2.7.6.21'
+__git_dirty_diff__ = ''
