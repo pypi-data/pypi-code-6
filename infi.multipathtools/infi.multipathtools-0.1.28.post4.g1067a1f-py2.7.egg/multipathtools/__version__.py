@@ -1,0 +1,10 @@
+__version__ = "0.1.28.post4.g1067a1f"
+__git_commiter_name__ = "Shai Keren"
+__git_commiter_email__ = "shaik@infinidat.com"
+__git_branch__ = 'develop'
+__git_remote_tracking_branch__ = 'origin/develop'
+__git_remote_url__ = 'git@infinigit.infinidat.com:/host/multipathtools.git'
+__git_head_hash__ = '1067a1fef4dca76907be39b73c4534af022ad3b7'
+__git_head_subject__ = 'HIP-395 added support for blacklisting by property'
+__git_head_message__ = ''
+__git_dirty_diff__ = ''
