@@ -1,0 +1,2 @@
+user = 'raphael'
+password = 'cinemacinema'
